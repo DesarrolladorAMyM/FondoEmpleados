@@ -1,0 +1,584 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Asociados | FAMYM - Fondo de Empleados AMYM</title>
+  <meta name="description" content="Actualiza tus datos como asociado de FAMYM - Fondo de Empleados AMYM de manera segura y rápida." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/portal.css' %}" />
+</head>
+<body class="portal-page">
+
+  <!-- NAV -->
+  <header class="header header--solid" id="header">
+    <nav class="nav container">
+      <a href="{% url 'index' %}" class="nav__logo">
+        <img src="{% static 'img/logo1.png' %}" alt="FAMYM Logo" class="nav__logo-img" />
+      </a>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="{% url 'index' %}#inicio"    class="nav__link">Inicio</a></li>
+        <li><a href="{% url 'index' %}#servicios" class="nav__link">Servicios</a></li>
+        <li><a href="{% url 'index' %}#nosotros"  class="nav__link">Nosotros</a></li>
+        <li><a href="{% url 'index' %}#contacto"  class="nav__link">Contacto</a></li>
+        <li><a href="{% url 'PortalAsociados' %}" class="nav__link nav__link--portal">Portal Asociados</a></li>
+      </ul>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- PORTAL HERO -->
+  <section class="portal-hero">
+    <div class="portal-hero__bg">
+      <div class="shape shape--1"></div>
+      <div class="shape shape--2"></div>
+    </div>
+    <div class="container portal-hero__content">
+      <a href="{% url 'index' %}" class="back-link">
+        <i class="fas fa-arrow-left"></i> Volver al inicio
+      </a>
+      <div class="portal-hero__badge">
+        <i class="fas fa-lock"></i> Área segura — FAMYM
+      </div>
+      <h1 class="portal-hero__title">
+        Actualización de <span class="gradient-text">Datos del Asociado</span>
+      </h1>
+      <p class="portal-hero__subtitle">
+        Mantén tu información al día de forma segura. FAMYM protege tus datos bajo la Ley 1581 de protección de datos personales.
+      </p>
+    </div>
+  </section>
+
+  <!-- FORMULARIO PRINCIPAL -->
+  <section class="section portal-section">
+    <div class="container">
+      <div class="portal__layout">
+
+        <!-- SIDEBAR -->
+        <aside class="portal__sidebar">
+          <div class="sidebar-card">
+            <div class="sidebar-card__icon"><i class="fas fa-shield-halved"></i></div>
+            <h3>Datos seguros</h3>
+            <p>Tu información está protegida con cifrado de extremo a extremo bajo las normas de protección de datos (Ley 1581).</p>
+          </div>
+          <div class="sidebar-card">
+            <div class="sidebar-card__icon"><i class="fas fa-bolt"></i></div>
+            <h3>Actualización inmediata</h3>
+            <p>Los cambios se aplican en el sistema dentro de las próximas 24 horas hábiles.</p>
+          </div>
+          <div class="sidebar-card">
+            <div class="sidebar-card__icon"><i class="fas fa-file-lines"></i></div>
+            <h3>Documentos requeridos</h3>
+            <ul class="sidebar-list">
+              <li>Cédula de ciudadanía vigente</li>
+              <li>RUT actualizado (si aplica)</li>
+              <li>Certificado bancario (si cambia cuenta)</li>
+              <li>Soporte del cambio de dirección</li>
+            </ul>
+          </div>
+          <div class="sidebar-card sidebar-card--help">
+            <div class="sidebar-card__icon"><i class="fas fa-headset"></i></div>
+            <h3>¿Necesitas ayuda?</h3>
+            <p>Contáctanos directamente:</p>
+            <a href="tel:+573108836491" class="sidebar-help-link">
+              <i class="fas fa-phone"></i> +57 310 883-6491
+            </a>
+            <a href="mailto:Auxiliarfamym@montacargasamym.com" class="sidebar-help-link">
+              <i class="fas fa-envelope"></i> Auxiliarfamym@montacargasamym.com
+            </a>
+          </div>
+        </aside>
+
+        <!-- FORMULARIO -->
+        <div class="portal__form-wrapper">
+
+          <!-- PROGRESO — ahora 5 pasos -->
+          <div class="form-steps">
+            <div class="form-step active" id="step-indicator-1">
+              <div class="form-step__dot">1</div>
+              <span>Identificación</span>
+            </div>
+            <div class="form-step__line"></div>
+            <div class="form-step" id="step-indicator-2">
+              <div class="form-step__dot">2</div>
+              <span>Datos Personales</span>
+            </div>
+            <div class="form-step__line"></div>
+            <div class="form-step" id="step-indicator-3">
+              <div class="form-step__dot">3</div>
+              <span>Info Financiera</span>
+            </div>
+            <div class="form-step__line"></div>
+            <div class="form-step" id="step-indicator-4">
+              <div class="form-step__dot">4</div>
+              <span>Autorizaciones</span>
+            </div>
+            <div class="form-step__line"></div>
+            <div class="form-step" id="step-indicator-5">
+              <div class="form-step__dot">5</div>
+              <span>Confirmación</span>
+            </div>
+          </div>
+
+          <form method="POST" class="portal__form" id="update-form"  novalidate>
+            {% csrf_token %}
+
+            <div class="form-panel active" id="panel-1">
+              <div class="form-panel__header">
+                <h2>Identificación del Asociado</h2>
+                <p>Verifica tu identidad para continuar con la actualización.</p>
+              </div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label for="tipo-doc">Tipo de documento *</label>
+                  <select id="tipo-doc" name="tipo_documento" required>
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="CC">Cédula de Ciudadanía</option>
+                    <option value="CE">Cédula de Extranjería</option>
+                    <option value="PA">Pasaporte</option>
+                    <option value="NIT">NIT</option>
+                  </select>
+                </div>
+                <div class="form__group">
+                  <label for="num-doc">Número de documento *</label>
+                  <input type="text" id="num-doc" name="numero_documento" placeholder="Ej. 1000234567" required />
+                </div>
+              </div>
+              <div class="form__group">
+                <label for="correo-reg">Correo registrado *</label>
+                <input type="email" id="correo-reg" name="correo_registrado" placeholder="correo@registrado.com" required />
+              </div>
+              <div class="form__group">
+                <label for="año">Año *</label>
+                <input type="number" id="año" name="año" required />
+              </div>
+              <div class="form__group form__group--checkbox">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="autoriza-datos" name="autoriza-datos" required />
+                  <span class="checkbox-custom"></span>
+                  Autorizo el tratamiento de mis datos personales según la
+                  <a href="#" class="link">Política de Privacidad</a> de FAMYM — Fondo de Empleados AMYM.
+                </label>
+              </div>
+              <div class="form__actions">
+                <button type="button" class="btn btn--primary" onclick="goToStep(2)">
+                  Continuar <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!--DATOS PERSONALES  -->
+            
+            <div class="form-panel" id="panel-2">
+              <div class="form-panel__header">
+                <h2>Datos Personales</h2>
+                <p>Actualiza tu información de contacto y datos personales.</p>
+              </div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label for="p-nombre">Primer nombre *</label>
+                  <input type="text" id="p-nombre" name="p_nombre" placeholder="Tu primer nombre" required />
+                </div>
+                <div class="form__group">
+                  <label for="s-nombre">Segundo nombre</label>
+                  <input type="text" id="s-nombre" name="s_nombre" placeholder="Tu segundo nombre" />
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label for="p-apellido">Primer apellido *</label>
+                  <input type="text" id="p-apellido" name="p_apellido" placeholder="Tu primer apellido" required />
+                </div>
+                <div class="form__group">
+                  <label for="s-apellido">Segundo apellido</label>
+                  <input type="text" id="s-apellido" name="s_apellido" placeholder="Tu segundo apellido" />
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label for="fecha-nac">Fecha de nacimiento *</label>
+                  <input type="date" id="fecha-nac" name="fecha_nacimiento" required />
+                </div>
+                <div class="form__group">
+                  <label for="genero">Género</label>
+                  <select id="genero" name="genero" required>
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                    <option value="NB">No binario</option>
+                    <option value="ND">Prefiero no decir</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label for="tel-cel">Celular *</label>
+                  <input type="tel" id="tel-cel" name="celular" placeholder="+57 300 000 0000" required />
+                </div>
+                <div class="form__group">
+                  <label for="tel-fijo">Teléfono fijo</label>
+                  <input type="tel" id="tel-fijo" name="telefono_fijo" placeholder="+57 (1) 234-5678" />
+                </div>
+              </div>
+          
+              <div class="form__row">
+                <div class="form__group">
+                  <label for="departamento">Departamento *</label>
+                  <select id="departamento" name="departamento" required>
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option>Bogotá D.C.</option>
+                    <option>Antioquia</option>
+                    <option>Valle del Cauca</option>
+                    <option>Atlántico</option>
+                    <option>Santander</option>
+                    <option>Cundinamarca</option>
+                    <option>Otro</option>
+                  </select>
+                </div>
+                <div class="form__group">
+                  <label for="ciudad">Ciudad *</label>
+                  <input type="text" id="ciudad" name="ciudad" placeholder="Tu ciudad" required />
+                </div>
+              </div>
+              <div class="form__group">
+                <label for="direccion">Dirección de residencia *</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Calle / Carrera / Avenida..." required />
+              </div>
+              <div class="form__actions">
+                <button type="button" class="btn btn--outline" onclick="goToStep(1)">
+                  <i class="fas fa-arrow-left"></i> Atrás
+                </button>
+                <button type="button" class="btn btn--primary" onclick="goToStep(3)">
+                  Continuar <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- ─── PASO 3: INFORMACIÓN FINANCIERA (rediseñado) ─── -->
+            <div class="form-panel" id="panel-3">
+              <div class="form-panel__header">
+                <h2>Información Financiera</h2>
+                <p>Actualiza tus datos bancarios y financieros para pagos y transferencias.</p>
+              </div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label for="patrimonio">Patrimonio estimado *</label>
+                  <select id="patrimonio" name="patrimonio" required>
+                    <option value="" disabled selected>Selecciona rango...</option>
+                    <option>Menos de $50.000.000</option>
+                    <option>$50.000.000 - $200.000.000</option>
+                    <option>$200.000.001 - $500.000.000</option>
+                    <option>Más de $500.000.000</option>
+                  </select>
+                </div>
+              </div>
+
+             <!-- NUEVO: Declaración origen de recursos -->
+              <div class="form__group">
+                <label>Declaro expresamente que los recursos que poseo provienen de las siguientes fuentes: *</label>
+                <div class="radio-group fuente-recursos-group" id="fuente-recursos-group">
+                  <label class="radio-label">
+                    <input type="radio" name="fuente_recursos" value="salario" required id="fuente-salario" />
+                    <span class="radio-custom"></span> Salario
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="fuente_recursos" value="otro" id="fuente-otro" />
+                                 
+                    <span class="radio-custom"></span> Otro
+                  </label>
+                  <div id="otro-fuente-wrapper" style="display:none;">
+                    <input
+                      type="text"
+                      id="otro-fuente-texto"
+                      name="fuente_recursos_otro"
+                      placeholder="Especifica la fuente..."
+                      class="form__input"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Residencia fiscal en otro país -->
+              <div class="form__group">
+                <label>¿Tiene residencia fiscal en otro país? *</label>
+                <div class="radio-group residencia-fiscal-group" id="residencia-fiscal-group">
+                  <label class="radio-label">
+                    <input type="radio" name="residencia_fiscal" value="si" id="residencia-fiscal-si" />
+                    <span class="radio-custom"></span> Sí
+                  </label>
+                  <div id="residencia-fiscal-pais-wrapper" style="display:none;">
+                    <input
+                      type="text"
+                      id="residencia-fiscal-pais"
+                      name="residencia_fiscal_pais"
+                      placeholder="Indica el país..."
+                      class="form__input"
+                    />
+                  </div>
+                  <label class="radio-label">
+                    <input type="radio" name="residencia_fiscal" value="no" required id="residencia-fiscal-no" />
+                    <span class="radio-custom"></span> No
+                  </label>
+                  
+                </div>
+              </div>
+              
+
+              <!-- NUEVO: Declarante de renta -->
+              <div class="form__group">
+                <label>¿Eres declarante de renta? *</label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="declarante_renta" value="si" required />
+                    <span class="radio-custom"></span> Sí
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="declarante_renta" value="no" />
+                    <span class="radio-custom"></span> No
+                  </label>
+                </div>
+              </div>
+
+              <!-- NUEVO: PEP -->
+              <div class="form__group">
+                <label>¿Eres una Persona Expuesta Políticamente (PEP)? *</label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="pep" value="si" required />
+                    <span class="radio-custom"></span> Sí
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="pep" value="no" />
+                    <span class="radio-custom"></span> No
+                  </label>
+                </div>
+              </div>
+
+              <!-- NUEVO: Observaciones adicionales -->
+              <div class="form__group">
+                <label for="observaciones">Observaciones adicionales</label>
+                <textarea id="observaciones" name="observaciones" rows="3" placeholder="Agrega cualquier información adicional que consideres relevante..."></textarea>
+              </div>
+
+              <!-- Adjuntar soporte (sin cambios) -->
+              <div class="form__group form__group--file">
+                <label>Adjuntar soporte (opcional)</label>
+                <div class="file-drop" id="file-drop">
+                  <div class="file-drop__icon"><i class="fas fa-paperclip"></i></div>
+                  <div class="file-drop__text">
+                    <strong>Arrastra tus archivos aquí</strong>
+                    <span>o <label for="archivo-doc" class="file-browse">haz clic para seleccionar</label></span>
+                    <small>PDF, JPG, PNG — Máximo 5 MB por archivo</small>
+                  </div>
+                  <input type="file" id="archivo-doc" name="archivo-doc" accept=".pdf,.jpg,.jpeg,.png" multiple />
+                </div>
+                <div class="file-list" id="file-list"></div>
+              </div>
+
+              <div class="form__actions">
+                <button type="button" class="btn btn--outline" onclick="goToStep(2)">
+                  <i class="fas fa-arrow-left"></i> Atrás
+                </button>
+                <button type="button" class="btn btn--primary" onclick="goToStep(4)">
+                  Continuar <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+                      <!-- ─── PASO 4: AUTORIZACIONES Y DECLARACIONES ─── -->
+            <div class="form-panel" id="panel-4">
+              <div class="form-panel__header">
+                <h2>Autorizaciones y Declaraciones</h2>
+                <p>Lee detenidamente cada sección antes de aceptar. Desplázate para leer el contenido completo.</p>
+              </div>
+
+              <div class="auth-scroll-hint" aria-hidden="true">
+                <i class="fas fa-arrow-down"></i>
+                Desplázate para leer todo el contenido
+              </div>
+
+              <div class="auth-scroll-box" id="auth-scroll-box">
+
+                <!-- Libranza -->
+                <div class="auth-section">
+                  <div class="auth-section__header">
+                    <div class="auth-section__icon"><i class="fas fa-file-signature"></i></div>
+                    <div class="auth-section__title">
+                      <h4>Autorización de Libranza</h4>
+                      <span class="auth-badge">Descuentos de nómina</span>
+                    </div>
+                  </div>
+                  <p>Autorizo a la empresa a la cual me encuentro vinculado laboralmente para que de mi salario, primas semestrales, cesantías, indemnizaciones y demás prestaciones sociales, efectúe las deducciones que correspondan a las cuotas por mí pactadas para ahorros, créditos, Fondo de Bienestar Social, productos y/o servicios tomados con FAMYM.</p>
+                  <p>Igualmente autorizo la deducción de los dineros necesarios para cubrir las obligaciones de cualquier tipo que hayan surgido en virtud del vínculo con FAMYM. Autorizo a la empresa generadora del vínculo de asociación para suministrar, compartir, transmitir, procesar y almacenar mi información laboral, salarial, de nómina y descuentos a FAMYM.</p>
+                </div>
+
+                <!-- Central de Riesgos -->
+                <div class="auth-section">
+                  <div class="auth-section__header">
+                    <div class="auth-section__icon"><i class="fas fa-database"></i></div>
+                    <div class="auth-section__title">
+                      <h4>Autorización Central de Riesgos — CIFIN</h4>
+                      <span class="auth-badge">Historial crediticio</span>
+                    </div>
+                  </div>
+                  <p>Autorizo a FAMYM para reportar, procesar, solicitar y divulgar a la Central de Información Financiera CIFIN toda la información referente a mi comportamiento comercial. Lo anterior implica que el cumplimiento o incumplimiento de mis obligaciones se verá reflejado en las mencionadas bases de datos.</p>
+                  <p>Autorizo a FAMYM para que en caso de incumplimiento de mis obligaciones, me notifique del reporte negativo a mi dirección de residencia o al correo electrónico registrado en esta solicitud.</p>
+                </div>
+
+                <!-- Tratamiento de datos -->
+                <div class="auth-section">
+                  <div class="auth-section__header">
+                    <div class="auth-section__icon"><i class="fas fa-user-shield"></i></div>
+                    <div class="auth-section__title">
+                      <h4>Tratamiento de Datos Personales</h4>
+                      <span class="auth-badge">Protección de datos · SARLAFT</span>
+                    </div>
+                  </div>
+                  <p>Autorizo de manera voluntaria, previa, expresa e informada a FAMYM para la recolección y posterior análisis de los datos aquí suministrados, con la finalidad de ser contactado y atender mis necesidades financieras.</p>
+                  <p>Declaro que he sido informado sobre el derecho que tengo a conocer, actualizar y rectificar mis datos personales, solicitar prueba de la autorización, presentar quejas ante la Superintendencia de Industria y Comercio (SIC) y revocar la autorización otorgada.</p>
+                  <p>Autorizo la consulta en listas públicas, restrictivas y vinculantes para dar cumplimiento con la normativa referente al Sistema de Administración de Riesgo de Lavado de Activos y Financiación del Terrorismo — <strong>SARLAFT</strong>.</p>
+                </div>
+
+                <!-- Contrato de Mandato -->
+                <div class="auth-section">
+                  <div class="auth-section__header">
+                    <div class="auth-section__icon"><i class="fas fa-handshake"></i></div>
+                    <div class="auth-section__title">
+                      <h4>Contrato de Mandato</h4>
+                      <span class="auth-badge">Adquisición de bienes y servicios</span>
+                    </div>
+                  </div>
+                  <p>Entre las personas que suscriben esta solicitud se ha celebrado el siguiente <strong>Contrato de Mandato</strong>, que se regirá por los lineamientos generales aquí contemplados y por la legislación aplicable.</p>
+
+                  <div class="auth-section__clause">
+                    <strong>Primera — Objeto del mandato</strong>
+                    <p>El asociado (MANDANTE) le confiere al Fondo de Empleados FAMYM (MANDATARIO) para que en nombre de este ejecute los actos de comercio definidos y aprobados por la Junta Directiva.</p>
+                  </div>
+                  <div class="auth-section__clause">
+                    <strong>Segunda — Obligaciones del mandatario</strong>
+                    <p>El MANDATARIO se obligará a adquirir directamente y a su nombre bienes y servicios que proporcionen bienestar al asociado y a su grupo familiar, para después trasladarlos a favor del asociado.</p>
+                  </div>
+                  <div class="auth-section__clause">
+                    <strong>Tercera — Orden de compra</strong>
+                    <p>El MANDATARIO se obliga a entregar al MANDANTE una orden de compra debidamente autorizada con referencia al proveedor y valor máximo en pesos.</p>
+                  </div>
+                  <div class="auth-section__clause">
+                    <strong>Cuarta — Previa autorización</strong>
+                    <p>El MANDATARIO no podrá adquirir bienes y/o servicios sin previa autorización del MANDANTE.</p>
+                  </div>
+                  <div class="auth-section__clause">
+                    <strong>Quinta — Gratuidad</strong>
+                    <p>Las obligaciones del MANDATARIO se prestarán de forma gratuita; solo se trasladarán al MANDANTE los valores adicionales que se deban cubrir por circunstancias especiales creadas por este.</p>
+                  </div>
+                  <div class="auth-section__clause">
+                    <strong>Sexta — Forma de pago</strong>
+                    <p>El MANDANTE podrá cancelar la obligación al contado o mediante financiación según las tarifas establecidas con el MANDATARIO.</p>
+                  </div>
+                </div>
+
+              </div><!-- /auth-scroll-box -->
+
+              <!-- Aceptación -->
+              <div class="auth-accept-wrapper">
+                <label class="auth-accept-label" for="acepta-autorizaciones">
+                  <input type="radio" id="acepta-autorizaciones" name="acepta_autorizaciones" value="si" required />
+                  <span class="auth-radio-custom"></span>
+                  <span class="auth-accept-text">
+                    <strong>He leído y acepto todas las autorizaciones y declaraciones anteriores</strong>
+                    <span>Al marcar esta opción confirmas que has leído el contenido completo de cada sección.</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="form__actions" style="margin-top: 1rem;">
+                <button type="button" class="btn btn--outline" onclick="goToStep(3)">
+                  <i class="fas fa-arrow-left"></i> Atrás
+                </button>
+                <button type="button" class="btn btn--primary" onclick="goToStep(5)">
+                  Revisar y enviar <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- ─── PASO 5: CONFIRMACIÓN (antes era panel-4) ─── -->
+            <div class="form-panel" id="panel-5">
+              <div class="form-panel__header">
+                <h2>Confirmación y Envío</h2>
+                <p>Revisa el resumen de tus cambios antes de enviar la solicitud.</p>
+              </div>
+              <div class="summary-box" id="summary-box">
+                <h3><i class="fas fa-list-check" style="color:var(--primary);margin-right:8px"></i> Resumen de la solicitud</h3>
+                <div class="summary-grid" id="summary-content">
+                  <!-- Llenado por portal.js -->
+                </div>
+              </div>
+              <div class="form__group form__group--checkbox">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="confirma-envio" name="confirma-envio" required />
+                  <span class="checkbox-custom"></span>
+                  Confirmo que la información proporcionada es veraz y autorizo a FAMYM para actualizar mis datos en el sistema.
+                </label>
+              </div>
+              <div class="form__actions">
+                <button type="button" class="btn btn--outline" onclick="goToStep(4)">
+                  <i class="fas fa-arrow-left"></i> Atrás
+                </button>
+                <button type="submit" class="btn btn--primary btn--full" id="submit-btn">
+                  <span>Enviar solicitud de actualización</span>
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- ─── ÉXITO ─── -->
+            <div class="form-panel" id="panel-success">
+              <div class="success-message">
+                <div class="success-message__icon">
+                  <i class="fas fa-circle-check"></i>
+                </div>
+                <h2>¡Solicitud enviada con éxito!</h2>
+                <p>Tu solicitud de actualización ha sido recibida. Nuestro equipo la procesará dentro de las próximas <strong>24 horas hábiles</strong>.</p>
+                <p>Recibirás un correo de confirmación con el número de radicado de tu solicitud.</p>
+                <div class="success-message__ticket">
+                  <span>Número de radicado:</span>
+                  <strong id="radicado-num">RAD-2026-00000</strong>
+                </div>
+                <div class="success-message__actions">
+                  <a href="{% url 'index' %}" class="btn btn--outline">
+                    <i class="fas fa-arrow-left"></i> Volver al inicio
+                  </a>
+                  <button type="button" class="btn btn--primary" onclick="resetForm()">
+                    <i class="fas fa-rotate-left"></i> Nueva solicitud
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div><!-- /portal__form-wrapper -->
+      </div><!-- /portal__layout -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>© 2026 FAMYM — Fondo de Empleados AMYM. Todos los derechos reservados.</p>
+        <p>Datos protegidos bajo la Ley 1581 de 2012 — Vigilados por la Supersolidaria</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/portal.js' %}"></script>
+ {% include "anuncios/anuncio.html" %}
+
+</body>
+</html>

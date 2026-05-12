@@ -1,0 +1,99 @@
+{% if anuncios_popup %}
+
+<style>
+  @keyframes entrar {
+    0%   { transform: translateY(60px) scale(0.8); opacity: 0; }
+    60%  { transform: translateY(-10px) scale(1.05); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  @keyframes flotar {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+  @keyframes borde-pulso {
+    0%   { box-shadow: 0 0 0 0 rgba(26,115,232,0.6); }
+    70%  { box-shadow: 0 0 0 10px rgba(26,115,232,0); }
+    100% { box-shadow: 0 0 0 0 rgba(26,115,232,0); }
+  }
+  .anuncio-popup-item.visible {
+    animation: entrar 0.6s ease forwards,
+               flotar 3s ease-in-out 1s infinite,
+               borde-pulso 2s ease 1s 3;
+  }
+</style>
+
+{% for anuncio in anuncios_popup %}
+<div id="anuncio-popup-{{ forloop.counter }}"
+     class="anuncio-popup-item"
+     style="
+       position: fixed;
+       /* Cada popup sube 20px más que el anterior */
+       bottom: calc(24px + {{ forloop.counter0 }} * 210px);
+       right: 24px;
+       width: 220px;
+       z-index: {{ 9999|add:forloop.counter }};
+       border-radius: 12px;
+       border: 2px solid #1a73e8;
+       overflow: hidden;
+       box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+       display: none;">
+
+  {% if anuncio.enlace %}
+    <a href="{{ anuncio.enlace }}" target="_blank" rel="noopener">
+  {% endif %}
+    <img src="{{ anuncio.imagen.url }}"
+         alt="{{ anuncio.titulo }}"
+         style="width:100%; display:block; object-fit:cover; max-height:130px;">
+  {% if anuncio.enlace %}</a>{% endif %}
+
+  <button onclick="cerrarPopup('anuncio-popup-{{ forloop.counter }}')"
+          style="position:absolute; top:6px; right:8px;
+                 background:rgba(0,0,0,.4); border:none; color:#fff;
+                 border-radius:50%; width:22px; height:22px;
+                 cursor:pointer; font-size:14px; line-height:1;">×</button>
+
+  <div style="padding: 10px 14px 14px; background:#fff;">
+    {% if anuncio.titulo %}
+      <p style="margin:0 0 4px; font-weight:600; font-size:14px;">
+        {{ anuncio.titulo }}
+      </p>
+    {% endif %}
+    {% if anuncio.subtitulo %}
+      <p style="margin:0 0 10px; font-size:12px; color:#666;">
+        {{ anuncio.subtitulo }}
+      </p>
+    {% endif %}
+    {% if anuncio.enlace %}
+      <a href="{{ anuncio.enlace }}" target="_blank"
+         style="display:block; text-align:center; padding:7px;
+                background:#1a73e8; color:#fff; border-radius:8px;
+                text-decoration:none; font-size:13px; font-weight:500;">
+        {{ anuncio.texto_boton }}
+      </a>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+
+<script>
+  // Mostrar cada popup con un pequeño delay escalonado
+  {% for anuncio in anuncios_popup %}
+  setTimeout(function() {
+    var popup = document.getElementById('anuncio-popup-{{ forloop.counter }}');
+    popup.style.display = 'block';
+    popup.classList.add('visible');
+  }, {{ forloop.counter0 }} * 400 + 2000);
+  {% endfor %}
+
+  function cerrarPopup(id) {
+    var popup = document.getElementById(id);
+    popup.style.animation = 'none';
+    popup.style.transition = 'all 0.3s ease';
+    popup.style.transform = 'translateY(60px)';
+    popup.style.opacity = '0';
+    setTimeout(function() { popup.remove(); }, 300);
+  }
+</script>
+
+{% endif %}

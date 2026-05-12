@@ -1,0 +1,1257 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAMYM | Fondo de Empleados AMYM</title>
+  <meta name="description"
+    content="FAMYM - Fondo de Empleados AMYM. Bienestar financiero, créditos, ahorro y beneficios para nuestros asociados." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#inicio" class="nav__logo">
+        <img src="{% static 'img/logo1.png' %}" alt="FAMYM Logo" class="nav__logo-img" />
+      </a>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="#inicio" class="nav__link">Inicio</a></li>
+        <li><a href="#servicios" class="nav__link">Servicios</a></li>
+        <li><a href="#nosotros" class="nav__link">Nosotros</a></li>
+        <li><a href="#contacto" class="nav__link">Contacto</a></li>
+        <li><a href="{% url 'PortalAsociados' %}" class="nav__link nav__link--portal">Portal Asociados</a></li>
+      </ul>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!--HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero__bg-shapes">
+      <div class="shape shape--1"></div>
+      <div class="shape shape--2"></div>
+      <div class="shape shape--3"></div>
+      <div class="shape shape--4"></div>
+    </div>
+    <div class="container hero__content">
+      <div class="hero__badge">
+        <i class="fas fa-star fa-xs"></i> Fondo de Empleados AMYM
+      </div>
+      <h1 class="hero__title">
+        Tu bienestar<br /><span class="gradient-text">es nuestra misión</span>
+      </h1>
+      <p class="hero__subtitle">
+        FAMYM es el fondo de empleados que trabaja para ti. Créditos, ahorro, auxilios y beneficios
+        diseñados para mejorar tu calidad de vida y la de tu familia.
+      </p>
+      
+      <div class="hero__actions">
+        <a href="#servicios" class="btn btn--primary">
+          <i class="fas fa-arrow-right"></i> Conoce nuestros beneficios
+        </a>
+        <a href="#contacto" class="btn btn--outline">
+          <i class="fas fa-message"></i> Comunícate con nosotros
+        </a>
+      </div>
+        <div class="hero__stats">
+          <div class="stat">
+            <div class="stat__row">
+              <span class="stat__num" data-target="500">0</span>
+              <span class="stat__suffix">+</span>
+            </div>
+            <span class="stat__label">Asociados activos</span>
+          </div>
+          <div class="stat__divider"></div>
+          <div class="stat">
+            <div class="stat__row">
+              <span class="stat__num" data-target="11">0</span>
+              <span class="stat__suffix">+</span>
+            </div>
+            <span class="stat__label">Años de solidaridad</span>
+          </div>
+          <div class="stat__divider"></div>
+          <div class="stat">
+            <div class="stat__row">
+              <span class="stat__num" data-target="100">0</span>
+              <span class="stat__suffix">+ Mill</span>
+            </div>
+            <span class="stat__label">Beneficios entregados</span>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!--  BANNER SLIDER -->
+  <section class="section section--banner">
+    <div class="container">
+      <div class="banner-slider" id="main-banner">
+        <div class="banner-slider__container" id="banner-track">
+
+          <div class="banner-slide active">
+            <div class="banner-slide__placeholder" style="background:linear-gradient(135deg,#0a1628 0%,#1e4d8c 100%);">
+              <div class="banner-placeholder-content">
+                <img src="{% static 'img/asociado1.png' %}" alt="Banner FAMYM" class="banner-slide__img" />
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-slide">
+            <div class="banner-slide__placeholder" style="background:linear-gradient(135deg,#1e4d8c 0%,#2980ef 100%);">
+              <div class="banner-placeholder-content">
+                <img src="{% static 'img/asociados2.png' %}" alt="Banner 2" class="banner-slide__img" />
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-slide">
+            <div class="banner-slide__placeholder" style="background:linear-gradient(135deg,#2980ef 0%,#00c6b8 100%);">
+              <div class="banner-placeholder-content">
+                <img src="{% static 'img/asociados3.png' %}" alt="Banner 3" class="banner-slide__img" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="banner-slider__btn banner-slider__btn--prev" id="banner-prev" aria-label="Anterior">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="banner-slider__btn banner-slider__btn--next" id="banner-next" aria-label="Siguiente">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="banner-slider__indicators" id="banner-dots">
+          <button class="banner-indicator active" data-slide="0"></button>
+          <button class="banner-indicator" data-slide="1"></button>
+          <button class="banner-indicator" data-slide="2"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- SERVICIOS — TABS -->
+  <section class="section" id="servicios">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Lo que ofrecemos</span>
+        <h2 class="section__title">Nuestros <span class="gradient-text">Servicios</span></h2>
+        <p class="section__subtitle">Beneficios integrales pensados en el bienestar económico y social de cada asociado
+          y su familia.</p>
+      </div>
+
+      <!--  TABS NAV  -->
+      <div class="tabs">
+        <div class="tabs__nav" role="tablist">
+          <button class="tab-btn active" data-tab="ahorro" role="tab">
+            <span class="tab-btn__icon"><i class="fas fa-piggy-bank"></i></span>
+            <span>Líneas de Ahorro</span>
+          </button>
+          <button class="tab-btn" data-tab="credito" role="tab">
+            <span class="tab-btn__icon"><i class="fas fa-landmark"></i></span>
+            <span>Líneas de Crédito</span>
+          </button>
+          <button class="tab-btn" data-tab="auxilios" role="tab">
+            <span class="tab-btn__icon"><i class="fas fa-hand-holding-heart"></i></span>
+            <span>Auxilios</span>
+          </button>
+          <button class="tab-btn" data-tab="convenios" role="tab">
+            <span class="tab-btn__icon"><i class="fas fa-handshake"></i></span>
+            <span>Convenios</span>
+          </button>
+        </div>
+
+        <!--  TAB: AHORRO  -->
+        <div class="tab-content active" id="tab-ahorro">
+          <div class="tab-intro">
+            <p>Contamos con diferentes modalidades de ahorro para que puedas alcanzar tus metas financieras con
+              flexibilidad y buenos rendimientos.</p>
+          </div>
+          <div class="ahorro-grid">
+
+            <!-- Ahorro Obligatorio -->
+            <div class="ahorro-card">
+              <div class="ahorro-card__header">
+                <div class="ahorro-card__icon">
+                  <i class="fas fa-thumbtack"></i>
+                </div>
+                <div>
+                  <h3>Ahorro Obligatorio</h3>
+                  <span class="ahorro-card__badge ahorro-card__badge--blue">Deducción por nómina</span>
+                </div>
+              </div>
+              <p class="ahorro-card__desc">Son los aportes sociales y el ahorro permanente que los asociados aportan de
+                manera obligatoria mediante deducción por nómina quincenalmente.</p>
+              <div class="ahorro-card__details">
+                <div class="detail-row">
+                  <span class="detail-label"><i class="fas fa-coins"></i> Cuota de ahorro</span>
+                  <span class="detail-value">Desde el 2% al 10% del salario básico mensual</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label"><i class="fas fa-arrow-right-from-bracket"></i> Retiro</span>
+                  <span class="detail-value">Cuando el asociado se retire del fondo o finalice su vínculo laboral con la empresa.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ahorro Voluntario -->
+            <div class="ahorro-card">
+              <div class="ahorro-card__header">
+                <div class="ahorro-card__icon">
+                  <i class="fas fa-piggy-bank"></i>
+                </div>
+                <div>
+                  <h3>Ahorro Voluntario</h3>
+                  <span class="ahorro-card__badge ahorro-card__badge--green">Flexible</span>
+                </div>
+              </div>
+              <p class="ahorro-card__desc">Ahorro adicional que el asociado puede realizar de manera libre, con disponibilidad para usarlo cuando lo necesite.</p>
+              <div class="ahorro-card__details">
+                <div class="detail-row">
+                  <span class="detail-label"><i class="fas fa-coins"></i> Cuota de ahorro</span>
+                  <span class="detail-value">Definida por el asociado</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label"><i class="fas fa-arrow-right-from-bracket"></i> Retiro</span>
+                  <span class="detail-value">Disponible en el momento que el asociado lo requiera</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ahorro Vacacional -->
+            <div class="ahorro-card">
+              <div class="ahorro-card__header">
+                <div class="ahorro-card__icon">
+                  <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <div>
+                  <h3>Ahorro Vacacional</h3>
+                  <span class="ahorro-card__badge ahorro-card__badge--teal">Programado</span>
+                </div>
+              </div>
+              <p class="ahorro-card__desc">Ahorro que le permite al asociado programarse para el disfrute de su período
+                de vacaciones, estableciendo una cuota fija quincenal.</p>
+              <div class="ahorro-card__details">
+                <div class="detail-row">
+                  <span class="detail-label"><i class="fas fa-coins"></i> Cuota mínima</span>
+                  <span class="detail-value">$10.000 mensuales</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label"><i class="fas fa-chart-line"></i> Rendimiento</span>
+                  <span class="detail-value">$5.000 mensuales</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label"><i class="fas fa-arrow-right-from-bracket"></i> Retiro</span>
+                  <span class="detail-value">Cuando el asociado salga a disfrutar vacaciones</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ahorro Navideño -->
+            <div class="ahorro-card">
+              <div class="ahorro-card__header">
+                <div class="ahorro-card__icon">
+                  <i class="fas fa-gifts"></i>
+                </div>
+                <div>
+                  <h3>Ahorro Navideño</h3>
+                  <span class="ahorro-card__badge ahorro-card__badge--red">Contractual</span>
+                </div>
+              </div>
+              <p class="ahorro-card__desc">Ahorro contractual que le permite al asociado prepararse para la época
+                decembrina, destinando de su ingreso una cuota de ahorro fija quincenal.</p>
+              <div class="ahorro-card__details">
+                <div class="detail-row">
+                  <span class="detail-label"><i class="fas fa-calendar-check"></i> Consignación</span>
+                  <span class="detail-value">Cosignacion en el més de noviembre de cada año</span>
+                </div>
+              </div>
+              <div class="navidad-table">
+                <div class="navidad-table__header">
+                  <span>Cuota Mensual</span>
+                  <span>Rendimiento</span>
+                </div>
+                <div class="navidad-table__row">
+                  <span>$30.000 – $39.999</span>
+                  <span class="green-text">$5.000</span>
+                </div>
+                <div class="navidad-table__row">
+                  <span>$40.000 – $49.999</span>
+                  <span class="green-text">$7.000</span>
+                </div>
+                <div class="navidad-table__row">
+                  <span>$50.000 en adelante</span>
+                  <span class="green-text">$10.000</span>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /ahorro-grid -->
+        </div><!-- /tab-ahorro -->
+
+        <!-- ── TAB: CRÉDITO ── -->
+        <div class="tab-content" id="tab-credito">
+          <div class="tab-intro">
+            <p>Ofrecemos créditos con excelentes tasas de interés y cuotas fijas quincenales que le brindan estabilidad
+              al presupuesto familiar.</p>
+          </div>
+
+          <div class="credito-features">
+            <h3 class="credito-features__title">Características Generales</h3>
+            <div class="credito-features__grid">
+              <div class="feature-chip"><i class="fas fa-calendar"></i> Antigüedad mínima de 2 meses</div>
+              <div class="feature-chip"><i class="fas fa-coins"></i> Cupo máximo = ahorro obligatorio × 4</div>
+              <div class="feature-chip"><i class="fas fa-clock"></i> Plazo sujeto al monto solicitado</div>
+              <div class="feature-chip"><i class="fas fa-building-columns"></i> Desembolso directo a cuenta de nómina
+              </div>
+              <div class="feature-chip"><i class="fas fa-magnifying-glass"></i> Todos los créditos sujetos a estudio
+              </div>
+            </div>
+          </div>
+
+          <div class="credito-grid">
+            <div class="credito-card">
+              <div class="credito-card__icon">
+                <i class="fas fa-hand-holding-dollar"></i>
+              </div>
+              <h3>Libre Inversión</h3>
+              <p>Para cubrir cualquier necesidad personal, del hogar, vehículo, remodelaciones y más. Tasas
+                preferenciales para asociados.</p>
+              <a href="#contacto" class="credito-card__link">Solicitar <i class="fas fa-arrow-right fa-xs"></i></a>
+            </div>
+            <div class="credito-card">
+              <div class="credito-card__icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h3>Educativo</h3>
+              <p>Financia tu formación académica o la de tu familia. Matrículas, útiles, programas técnicos y
+                universitarios.</p>
+              <a href="#contacto" class="credito-card__link">Solicitar <i class="fas fa-arrow-right fa-xs"></i></a>
+            </div>
+            <div class="credito-card">
+              <div class="credito-card__icon">
+                <i class="fas fa-heart-pulse"></i>
+              </div>
+              <h3>Salud – Calamidad</h3>
+              <p>Apoyo inmediato para gastos médicos urgentes o situaciones de emergencia que afecten a ti o tu familia.
+              </p>
+              <a href="#contacto" class="credito-card__link">Solicitar <i class="fas fa-arrow-right fa-xs"></i></a>
+            </div>
+            <div class="credito-card">
+              <div class="credito-card__icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <h3>Especial</h3>
+              <p>Línea de crédito diseñada para aprovechar beneficios exclusivos en convenios empresariales, 
+                itando el acceso a productos y servicios con condiciones preferenciales.</p>
+              <a href="#contacto" class="credito-card__link">Solicitar <i class="fas fa-arrow-right fa-xs"></i></a>
+            </div>
+          </div>
+
+          <!-- Bono Solidario -->
+          <div class="bono-solidario">
+            <div class="bono-solidario__icon">
+              <i class="fas fa-hand-holding-hand"></i>
+            </div>
+            <div class="bono-solidario__content">
+              <h3>Bono Solidario</h3>
+              <p>El bono solidario es un aporte de los asociados para promover la ayuda mutua, fomentar los valores y
+                principios de la economía solidaria.</p>
+              <div class="bono-details">
+                <span><strong>Valor:</strong> $5.000 quincenal</span>
+                <span><strong>Pago:</strong> Por nómina</span>
+                <span><strong>Participan:</strong> Todos los asociados</span>
+              </div>
+            </div>
+          </div>
+        </div><!-- /tab-credito -->
+
+        <!--  TAB: AUXILIOS  -->
+        <div class="tab-content" id="tab-auxilios">
+          <div class="tab-intro">
+            <p>Los auxilios son beneficios especiales que FAMYM otorga a sus asociados para apoyarlos en momentos
+              importantes de la vida.</p>
+          </div>
+          <div class="auxilios-grid">
+
+            <div class="auxilio-card">
+              <div class="auxilio-card__icon">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h3>Auxilio Escolar</h3>
+              <div class="auxilio-detail"><strong>Antigüedad:</strong> 2 meses en FAMYM</div>
+              <div class="auxilio-detail"><strong>Reconocimiento:</strong> Kit escolar</div>
+              <div class="auxilio-req">
+                <strong><i class="fas fa-circle-check"></i> Requisitos:</strong>
+                <p>Envío de formulario de postulación en las fechas establecidas.</p>
+              </div>
+            </div>
+
+            <div class="auxilio-card">
+              <div class="auxilio-card__icon">
+                <i class="fas fa-baby"></i>
+              </div>
+              <h3>Auxilio de Nacimiento</h3>
+              <div class="auxilio-detail"><strong>Antigüedad:</strong> 2 meses en FAMYM</div>
+              <div class="auxilio-detail"><strong>Reconocimiento:</strong>Valor monetario</div>
+              <div class="auxilio-req">
+                <strong><i class="fas fa-circle-check"></i> Requisitos:</strong>
+                <p>Certificado de nacido vivo</p>
+              </div>
+            </div>
+
+            <div class="auxilio-card">
+              <div class="auxilio-card__icon">
+                <i class="fas fa-glasses"></i>
+              </div>
+              <h3>Auxilio de Lentes</h3>
+              <div class="auxilio-detail"><strong>Antigüedad:</strong> 2 meses en FAMYM</div>
+              <div class="auxilio-req">
+                <strong><i class="fas fa-circle-check"></i> Requisitos:</strong>
+                <ul>
+                  <li>Presentar factura o fórmula de los lentes del año en curso.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="auxilio-card">
+              <div class="auxilio-card__icon">
+                <i class="fas fa-dove"></i>
+              </div>
+              <h3>Auxilio por Fallecimiento</h3>
+              <div class="auxilio-detail"><strong>Aplica para:</strong> Padres, hijos y cónyuge</div>
+              <div class="auxilio-req">
+                <strong><i class="fas fa-circle-check"></i> Requisitos:</strong>
+                <ul>
+                  <li>Presentar certificado de parentesco.</li>
+                  <li>Certificado de defunción.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- /auxilios-grid -->
+        </div><!-- /tab-auxilios -->
+
+        <!--  TAB: CONVENIOS  -->
+        <div class="tab-content" id="tab-convenios">
+          <div class="tab-intro">
+            <p>FAMYM ha gestionado convenios con empresas aliadas para ofrecerte descuentos y beneficios exclusivos.
+              Selecciona una zona para ver los convenios disponibles.</p>
+          </div>
+
+          <!-- ZONAS DE NAVEGACIÓN -->
+          <div class="zonas-nav" id="zonas-nav">
+
+            <button class="zona-btn active" data-zona="nacional">
+              <div class="ahorro-card__icon">
+                <i class="fa-solid fa-earth-africa"></i>
+              </div>
+              <div class="zona-btn__name">Convenios Nacionales</div>
+              <div class="zona-btn__sub">Todo el país</div>
+              <span class="zona-btn__arrow">▼</span>
+            </button>
+
+            <button class="zona-btn" data-zona="valle">
+              <div class="ahorro-card__icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="zona-btn__name">Zona Valle</div>
+              <div class="zona-btn__sub">Valle del Cauca</div>
+              <span class="zona-btn__arrow">▼</span>
+            </button>
+
+            <button class="zona-btn" data-zona="antioquia">
+              <div class="ahorro-card__icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="zona-btn__name">Zona Antioquia</div>
+              <div class="zona-btn__sub">Medellín y región</div>
+              <span class="zona-btn__arrow">▼</span>
+            </button>
+
+            <button class="zona-btn" data-zona="costa">
+              <div class="ahorro-card__icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="zona-btn__name">Zona Costa</div>
+              <div class="zona-btn__sub">Caribe colombiano</div>
+              <span class="zona-btn__arrow">▼</span>
+            </button>
+
+            <button class="zona-btn" data-zona="centro">
+              <div class="ahorro-card__icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="zona-btn__name">Zona Centro</div>
+              <div class="zona-btn__sub">Bogotá y región</div>
+              <span class="zona-btn__arrow">▼</span>
+            </button>
+
+          </div>
+
+
+          <!-- PANEL: NACIONAL -->
+          <div class="zona-panel active" id="zona-nacional">
+            <div class="zona-panel__header">
+              <div class="zona-panel__dot" style="background:#1a56db"></div>
+              <span class="zona-panel__title">Convenios a nivel nacional</span>
+              <span class="zona-panel__count">8 aliados disponibles</span>
+            </div>
+            <div class="convenios-grid">
+
+              <div class="convenio-card"
+                data-nombre="Seguros e Inversiones"
+                data-categoria="Seguros"
+                data-beneficio="Condiciones preferenciales"
+                data-info="Accede a tarifas preferenciales y descuentos en seguros vehiculares. Aplica para asociados FAMYM."
+                data-asesor="Daniela Areiza"
+                data-celular="+57 300 766-3985"
+                data-tipo="Seguros vehiculares"
+                data-vigencia="2026">
+                <div class="convenio-card__logo"><img src="{% static 'img/inversiones.png' %}" alt="inversiones"></div>
+                <div class="convenio-card__name">Seguros e Inversiones</div>
+                <div class="convenio-card__cat">Seguros</div>
+                <div class="convenio-card__beneficio">Seguros vehiculares</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="Sura"
+                data-categoria="Salud y Seguros"
+                data-beneficio="Condiciones preferenciales"
+                data-info="Beneficios en servicios de salud y seguros con Sura. Condiciones preferenciales para todos los asociados de FAMYM y sus grupos familiares."
+                data-asesor="Auxiliar FAMYM"
+                data-celular="+57 310 883-6491"
+                data-tipo="Salud y Seguros"
+                data-vigencia="2025">
+                <div class="convenio-card__logo"><img src="{% static 'img/sura.png' %}" alt="Sura"></div>
+                <div class="convenio-card__name">Sura</div>
+                <div class="convenio-card__cat">Salud y Seguros</div>
+                <div class="convenio-card__beneficio">Condiciones preferenciales</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="Éxito"
+                data-categoria="Mercados"
+                data-beneficio="Atención Preferencial"
+                data-info="Atención preferencial y descuentos en el Grupo Éxito. Válido en supermercados Éxito, Carulla y Surtimax."
+                data-asesor="Manuela Castro"
+                data-celular="+57 310 883-6491"
+                data-tipo="Compras"
+                data-vigencia="2026">
+                <div class="convenio-card__logo"><img src="{% static 'img/exito.png' %}" alt="Éxito"></div>
+                <div class="convenio-card__name">Éxito</div>
+                <div class="convenio-card__cat">Mercados</div>
+                <div class="convenio-card__beneficio">Atención Preferencial</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="Aviatur"
+                data-categoria="Viajes y Turismo"
+                data-beneficio="Tarifas preferenciales"
+                data-info="Tarifas preferenciales y atención especial para asociados FAMYM. Tiquetes, paquetes turísticos y más."
+                data-asesor="Angie granada"
+                data-celular="+57 322 910-0063"
+                data-tipo="viajes"
+                data-vigencia="2026">
+                <div class="convenio-card__logo"><img src="{% static 'img/aviatur.png' %}" alt="Aviatur"></div>
+                <div class="convenio-card__name">Aviatur</div>
+                <div class="convenio-card__cat">Viajes y Turismo</div>
+                <div class="convenio-card__beneficio">Tarifas preferenciales</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="RoyalFilms"
+                data-categoria="Salud Visual"
+                data-beneficio="Descuento en óptica"
+                data-info="Descuentos en monturas, lentes y servicios de optometría en ExcelLentes. Complementa tu auxilio de lentes FAMYM."
+                data-asesor="Manuela Castro"
+                data-celular="+57 310 833-6491"
+                data-tipo="Cine"
+                data-vigencia="2026">
+                <div class="convenio-card__logo"><img src="{% static 'img/royalfilms.jpg' %}" alt="ExcelLentes"></div>
+                <div class="convenio-card__name">RoyalFilms</div>
+                <div class="convenio-card__cat">Cine</div>
+                <div class="convenio-card__beneficio">Descuento en cine</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="Óptica Colombiana"
+                data-categoria="Salud"
+                data-beneficio="Descuento en Óptica"
+                data-info="Descuentos especiales en monturas, lentes formulados, gafas de sol y servicios de salud visual para todos los asociados FAMYM y su grupo familiar."
+                data-asesor="Lorena Carrillo"
+                data-celular="+57 310 833-6491"
+                data-tipo="Salud visual"
+                data-vigencia="2025">
+                <div class="convenio-card__logo"><img src="{% static 'img/colombiana.png' %}" alt="ExcelLentes"></div>
+                <div class="convenio-card__name">Óptica Colombiana</div>
+                <div class="convenio-card__cat">Salud</div>
+                <div class="convenio-card__beneficio">Descuento en Óptica</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="Óptica Santa Lucia"
+                data-categoria="Salud"
+                data-beneficio="Descuento en Óptica"
+                data-info="Descuentos especiales en monturas, lentes formulados, gafas de sol y servicios de salud visual para todos los asociados FAMYM y su grupo familiar."
+                data-asesor="Liseth"
+                data-celular="+57 310 500-2843"
+                data-tipo="Salud visual"
+                data-vigencia="2026">
+                <div class="convenio-card__logo"><img src="{% static 'img/santalucia.png' %}" alt="ExcelLentes"></div>
+                <div class="convenio-card__name">Óptica Santa Lucia</div>
+                <div class="convenio-card__cat">Salud visual</div>
+                <div class="convenio-card__beneficio">Descuento en Óptica</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="Aseguradora solidaria"
+                data-categoria="Salud"
+                data-beneficio="Descuento en seguros"
+                data-info="Convenio con Aseguradora Solidaria que ofrece beneficios en seguros, protección familiar y servicios complementarios para los asociados FAMYM."
+                data-asesor="Manuela Castro"
+                data-celular="+57 310 883-6491"
+                data-tipo="SOAT"
+                data-vigencia="2025">
+                <div class="convenio-card__logo"><img src="{% static 'img/solidaria.png' %}" alt="ExcelLentes"></div>
+                <div class="convenio-card__name">Aseguradora solidaria</div>
+                <div class="convenio-card__cat">Seguros</div>
+                <div class="convenio-card__beneficio">Descuento en seguros</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /zona-nacional -->
+
+          <!-- PANEL: VALLE -->
+          <div class="zona-panel" id="zona-valle">
+            <div class="zona-panel__header">
+              <div class="zona-panel__dot" style="background:#0f6e56"></div>
+              <span class="zona-panel__title">Convenios zona Valle</span>
+              <span class="zona-panel__count">3 aliados disponibles</span>
+            </div>
+            <div class="grid-flexible">
+
+              <div class="convenio-card"
+                data-nombre="La ofrenda"
+                data-categoria="Gastronomía"
+                data-info="Convenio con funeraria que brinda servicios exequiales con tarifas preferenciales para los asociados FAMYM y su grupo familiar."
+                data-asesor="Rosalba"
+                data-celular="+57 315 597-9895"
+                data-tipo="Servicios funerarios"
+                data-vigencia="2026">
+                <div class="convenio-card__logo"><img src="{% static 'img/ofrenda.jpg' %}" alt="La Ofrenda"></div>
+                <div class="convenio-card__name">La Ofrenda</div>
+                <div class="convenio-card__cat">Servicios funerarios</div>
+                <div class="convenio-card__beneficio">Planes exequiales preferencialesl</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="prever"
+                data-categoria="Funeraria"
+                data-beneficio="Membresía preferencial"
+                data-info="Convenio con Prever que ofrece planes exequiales, servicios funerarios y acompañamiento integral con tarifas preferenciales para los asociados FAMYM y su grupo familiar."
+                data-asesor="Verónica"
+                data-celular="+57 301 689-7205"
+                data-tipo="Servicios funerarios"
+                data-vigencia="2026">
+                <div class="convenio-card__logo"><img src="{% static 'img/prever.jpg' %}" alt="Prever"></div>
+                <div class="convenio-card__name"></div>
+                <div class="convenio-card__name">Prever</div>
+                <div class="convenio-card__cat">Servicios funerarios</div>
+                <div class="convenio-card__beneficio">Planes exequiales preferencialesl</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="Óptica Bacatá"
+                data-categoria="Óptica"
+                data-beneficio="Descuento en matrículas"
+                 data-info="Obtén descuentos especiales en lentes formulados, monturas y exámenes visuales. Aplica para asociados FAMYM y su grupo familiar."
+                data-asesor="Katerin"
+                data-celular="+57 311 855-0102"
+                data-tipo="Salud visual"
+                data-vigencia="2025">
+                <div class="convenio-card__logo"><img src="{% static 'img/bacata.jpg' %}" alt="Óptica Bacatá"></div>
+                <div class="convenio-card__name">Óptica Bacatá</div>
+                <div class="convenio-card__cat">salud visual</div>
+                <div class="convenio-card__beneficio">Descuentos en lentes y monturas</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /zona-valle -->
+
+          <!-- PANEL: ANTIOQUIA -->
+          <div class="zona-panel" id="zona-antioquia">
+            <div class="zona-panel__header">
+              <div class="zona-panel__dot" style="background:#7f77dd"></div>
+              <span class="zona-panel__title">Convenios zona Antioquia</span>
+              <span class="zona-panel__count">4 aliados disponibles</span>
+            </div>
+            <div class="convenios-grid">
+
+              <div class="convenio-card"
+                data-nombre="Dental Miracle"
+                data-categoria="Salud"
+                data-beneficio="Tarifas diferenciadas"
+                data-info="Accede a descuentos en valoración odontológica, limpieza, blanqueamiento, ortodoncia y otros tratamientos dentales. Aplica para asociados FAMYM y su grupo familiar."
+                data-asesor="Mariluz Castro"
+                data-celular="+57 316 794-8684"
+                data-tipo="Salud Oral"
+                data-vigencia="2025">
+                <div class="convenio-card__logo"><img src="{% static 'img/miracle.png' %}" alt="DentalMiracle"></div>
+                <div class="convenio-card__name">Dental Miracle</div>
+                <div class="convenio-card__cat">Salud</div>
+                <div class="convenio-card__beneficio">Descuentos en servicios odontológicos</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="Inducascos"
+                data-categoria="Cascos"
+                data-beneficio="Descuentos en cascos y EPP"
+                data-info="Accede a descuentos en cascos de seguridad, dotación y elementos de protección personal (EPP). Aplica para asociados FAMYM."
+                data-asesor="Manuela Castro"
+                data-celular="+57 310 883-6491"
+                data-tipo="Educación"
+                data-vigencia="2025">
+                <div class="convenio-card__logo"><img src="{% static 'img/inducascos.png' %}" alt="inducascos"></div>
+                <div class="convenio-card__name">Inducascos</div>
+                <div class="convenio-card__cat">Cascos</div>
+                <div class="convenio-card__beneficio">Cascos y EPP</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="prever"
+                data-categoria="Deporte y Salud"
+                data-beneficio="Membresía preferencial"
+                data-info="Convenio con Prever que ofrece planes exequiales, servicios funerarios y acompañamiento integral con tarifas preferenciales para los asociados FAMYM y su grupo familiar."
+                data-asesor="Verónica"
+                data-celular="+57 301 689-7205"
+                data-tipo="Servicios funerarios"
+                data-vigencia="2026">
+                <div class="convenio-card__logo"><img src="{% static 'img/prever.jpg' %}" alt="Prever"></div>
+                <div class="convenio-card__name"></div>
+                <div class="convenio-card__cat">Servicios funerarios</div>
+                <div class="convenio-card__beneficio">Planes exequiales preferencialesl</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card"
+                data-nombre="Óptica colombiana"
+                data-categoria="Retail"
+                data-beneficio="Ofertas exclusivas"
+                data-info="Accede a descuentos en monturas, lentes y servicios de salud visual en Óptica Colombiana. Aplica para asociados FAMYM."
+                data-asesor="Lorena Carrillo"
+                data-celular="+57 310 883-6491"
+                data-tipo="Retail"
+                data-vigencia="2025">
+                <div class="convenio-card__logo"><img src="{% static 'img/colombiana.png' %}" alt="optica colombiana"></div>
+                <div class="convenio-card__name">Óptica Colombiana</div>
+                <div class="convenio-card__cat">Óptica</div>
+                <div class="convenio-card__beneficio">Gafas y salud visual</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /zona-antioquia -->
+
+          <!-- PANEL: COSTA -->
+          <div class="zona-panel" id="zona-costa">
+            <div class="zona-panel__header">
+              <div class="zona-panel__dot" style="background:#ba7517"></div>
+              <span class="zona-panel__title">Convenios zona Costa</span>
+              <span class="zona-panel__count">Disponibilidad de aliados 0</span>
+            </div>
+              <div class="empty-state">
+                <div class="empty-state__icon">
+                  <i class="fas fa-face-sad-tear"></i>
+                </div>
+                <h3>No hay convenios disponibles</h3>
+                <p>Pronto tendremos nuevos aliados en esta zona.</p>
+              </div>
+              <!--
+              <div class="convenio-card" data-nombre="Aliado Costa 1" data-categoria="Hospedaje"
+                data-beneficio="Tarifa especial"
+                data-info="Tarifa especial en hoteles del Caribe colombiano. Disfruta del mar con precios preferenciales para asociados FAMYM."
+                data-asesor="Auxiliar FAMYM" data-celular="+57 310 883-6491"
+                data-tipo="Hospedaje" data-vigencia="2025">
+                <div class="convenio-card__logo"><i class="fas fa-umbrella-beach"
+                    style="font-size:1.8rem;color:var(--primary)"></i></div>
+                <div class="convenio-card__name">Aliado Costa 1</div>
+                <div class="convenio-card__cat">Hospedaje</div>
+                <div class="convenio-card__beneficio">Tarifa especial</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card" data-nombre="Aliado Costa 2" data-categoria="Gastronomía"
+                data-beneficio="Descuento en carta"
+                data-info="Descuento especial en carta en restaurantes de mariscos y cocina caribeña aliados con FAMYM en la Costa Atlántica."
+                data-asesor="Auxiliar FAMYM" data-celular="+57 310 883-6491"
+                data-tipo="Gastronomía" data-vigencia="2025">
+                <div class="convenio-card__logo"><i class="fas fa-fish"
+                    style="font-size:1.8rem;color:var(--primary)"></i></div>
+                <div class="convenio-card__name">Aliado Costa 2</div>
+                <div class="convenio-card__cat">Gastronomía</div>
+                <div class="convenio-card__beneficio">Descuento en carta</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card" data-nombre="Aliado Costa 3" data-categoria="Turismo"
+                data-beneficio="Paquetes con descuento"
+                data-info="Paquetes turísticos con descuento para conocer Cartagena, Santa Marta y Barranquilla con operadores aliados."
+                data-asesor="Auxiliar FAMYM" data-celular="+57 310 883-6491"
+                data-tipo="Turismo" data-vigencia="2025">
+                <div class="convenio-card__logo"><i class="fas fa-map-location-dot"
+                    style="font-size:1.8rem;color:var(--primary)"></i></div>
+                <div class="convenio-card__name">Aliado Costa 3</div>
+                <div class="convenio-card__cat">Turismo</div>
+                <div class="convenio-card__beneficio">Paquetes con descuento</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card" data-nombre="Aliado Costa 4" data-categoria="Salud"
+                data-beneficio="Atención preferencial"
+                data-info="Atención preferencial en clínicas y centros médicos de la Costa Caribe para asociados FAMYM y su familia."
+                data-asesor="Auxiliar FAMYM" data-celular="+57 310 883-6491"
+                data-tipo="Salud" data-vigencia="2025">
+                <div class="convenio-card__logo"><i class="fas fa-stethoscope"
+                    style="font-size:1.8rem;color:var(--primary)"></i></div>
+                <div class="convenio-card__name">Aliado Costa 4</div>
+                <div class="convenio-card__cat">Salud</div>
+                <div class="convenio-card__beneficio">Atención preferencial</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card" data-nombre="Aliado Costa 5" data-categoria="Educación"
+                data-beneficio="Descuento en postgrados"
+                data-info="Descuento en programas de postgrado y educación continua en universidades aliadas de la Costa Caribe colombiana."
+                data-asesor="Auxiliar FAMYM" data-celular="+57 310 883-6491"
+                data-tipo="Educación" data-vigencia="2025">
+                <div class="convenio-card__logo"><i class="fas fa-university"
+                    style="font-size:1.8rem;color:var(--primary)"></i></div>
+                <div class="convenio-card__name">Aliado Costa 5</div>
+                <div class="convenio-card__cat">Educación</div>
+                <div class="convenio-card__beneficio">Descuento en postgrados</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+              <div class="convenio-card" data-nombre="Aliado Costa 6" data-categoria="Mercados"
+                data-beneficio="Precios especiales"
+                data-info="Precios especiales en supermercados y tiendas aliadas de la Costa Atlántica. Ahorra en tu mercado mensual."
+                data-asesor="Auxiliar FAMYM" data-celular="+57 310 883-6491"
+                data-tipo="Mercados" data-vigencia="2025">
+                <div class="convenio-card__logo"><i class="fas fa-cart-shopping"
+                    style="font-size:1.8rem;color:var(--primary)"></i></div>
+                <div class="convenio-card__name">Aliado Costa 6</div>
+                <div class="convenio-card__cat">Mercados</div>
+                <div class="convenio-card__beneficio">Precios especiales</div>
+                <div class="convenio-card__footer">
+                  <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                  <span class="convenio-card__ver">Ver Beneficios</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          zona-costa -->
+
+        </div>
+
+        <!-- PANEL: CENTRO -->
+        <div class="zona-panel" id="zona-centro">
+          <div class="zona-panel__header">
+            <div class="zona-panel__dot" style="background:#00c6b8"></div>
+            <span class="zona-panel__title">Convenios zona Centro</span>
+            <span class="zona-panel__count">2 aliados disponibles</span>
+          </div>
+          <div class="convenios-grid">
+
+            <div class="convenio-card"
+              data-nombre="Capillas de la fe"
+              data-categoria="Servicios Funerarios"
+              data-beneficio="Tarifas preferenciales en servicios exequiales"
+              data-info="Accede a tarifas preferenciales en servicios funerarios y planes exequiales para asociados FAMYM y su grupo familiar."
+              data-asesor="Elizabeth Lozano"
+              data-celular="+57 320 492-7614"
+              data-tipo="Servicios Funerarios"
+              data-vigencia="2025">
+              <div class="convenio-card__logo"><img src="{% static 'img/fe.jpg' %}" alt="fé"></div>
+              <div class="convenio-card__name">Capillas de la FÉ</div>
+              <div class="convenio-card__cat">Servicios Funerarios</div>
+              <div class="convenio-card__beneficio">Servicios exequiales</div>
+              <div class="convenio-card__footer">
+                <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                <span class="convenio-card__ver">Ver Beneficios</span>
+              </div>
+            </div>
+
+            <div class="convenio-card"
+              data-nombre="Óptica excelentes"
+              data-categoria="Salud"
+              data-beneficio="Descuentos en gafas y servicios visuales"
+               data-info="Accede a descuentos en monturas, lentes oftálmicos, gafas de sol y exámenes visuales para asociados FAMYM y su grupo familiar."
+              data-asesor="Laura"
+              data-celular="+57 319 664-1822"
+              data-tipo="Óptica"
+              data-vigencia="2025">
+              <div class="convenio-card__logo"><img src="{% static 'img/excelentes.png' %}" alt="excelentes"></div>
+              <div class="convenio-card__name">Excelentes</div>
+              <div class="convenio-card__cat">Salud</div>
+              <div class="convenio-card__beneficio">Descuentos en gafas y servicios visuales</div>
+              <div class="convenio-card__footer">
+                <span class="convenio-card__badge"><i class="fas fa-award"></i></span>
+                <span class="convenio-card__ver">Ver Beneficios</span>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /zona-centro -->
+
+      </div>
+
+    </section>
+
+  <!-- MODAL CONVENIO -->
+  <div class="modal" id="convenio-modal">
+    <div class="modal__overlay" id="modal-overlay"></div>
+    <div class="modal__content">
+      <button class="modal__close" id="modal-close"><i class="fas fa-xmark"></i></button>
+      <div class="modal__logo-wrap">
+        <img id="modal-logo" src="" alt="" onerror="this.style.display='none'" />
+      </div>
+      <div class="modal__tag" id="modal-categoria">Categoría</div>
+      <h3 class="modal__title" id="modal-title">Nombre</h3>
+      <p class="modal__beneficio" id="modal-beneficio"></p>
+      <p class="modal__info" id="modal-info"></p>
+      <div class="modal__details">
+        <div class="modal__detail-row">
+          <span class="modal__detail-icon"><i class="fas fa-user-tie"></i></span>
+          <div>
+            <span class="modal__detail-label">Asesor</span>
+            <span class="modal__detail-value" id="modal-asesor"></span>
+          </div>
+        </div>
+        <div class="modal__detail-row">
+          <span class="modal__detail-icon"><i class="fas fa-mobile-screen-button"></i></span>
+          <div>
+            <span class="modal__detail-label">Celular</span>
+            <span class="modal__detail-value" id="modal-celular"></span>
+          </div>
+        </div>
+        <div class="modal__detail-row">
+          <span class="modal__detail-icon"><i class="fas fa-handshake"></i></span>
+          <div>
+            <span class="modal__detail-label">Tipo de convenio</span>
+            <span class="modal__detail-value" id="modal-tipo"></span>
+          </div>
+        </div>
+        <div class="modal__detail-row">
+          <span class="modal__detail-icon"><i class="fas fa-calendar-alt"></i></span>
+          <div>
+            <span class="modal__detail-label">Vigencia</span>
+            <span class="modal__detail-value" id="modal-vigencia"></span>
+          </div>
+        </div>
+      </div>
+      <a href="#contacto" class="btn btn--primary modal__btn" id="modal-link">
+        <i class="fas fa-paper-plane"></i> Solicitar este beneficio
+      </a>
+    </div>
+  </div>
+
+  <!-- NOSOTROS -->
+  <section class="section section--dark" id="nosotros">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__content">
+          <span class="section__tag section__tag--light">Quiénes somos</span>
+          <h2 class="section__title section__title--light">Más de 11 años <span class="gradient-text">construyendo
+              bienestar</span></h2>
+          <p class="about__text">FAMYM — Fondo de Empleados AMYM es una entidad solidaria sin ánimo de lucro,
+            constituida y dirigida por sus propios asociados. Nuestra razón de ser es mejorar la calidad de vida de cada
+            uno de los trabajadores vinculados a AMYM y su grupo familiar.</p>
+          <p class="about__text">Actuamos bajo los principios de la economía solidaria: democracia, participación, ayuda
+            mutua y desarrollo humano. Cada peso ahorrado, cada crédito otorgado, retorna en bienestar real para nuestra
+            comunidad.</p>
+          <div class="about__values">
+            <div class="value-item">
+              <div class="value-item__dot"></div>
+              <div>
+                <strong>Solidaridad</strong>
+                <p>Nos apoyamos mutuamente para crecer juntos como comunidad.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-item__dot"></div>
+              <div>
+                <strong>Transparencia</strong>
+                <p>Gestionamos los recursos con honestidad y rendición de cuentas.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-item__dot"></div>
+              <div>
+                <strong>Compromiso Social</strong>
+                <p>Velamos por el bienestar integral de cada asociado y su familia.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about__visual">
+          <div class="about__card about__card--1">
+            <div class="about__card-icon"><i class="fas fa-trophy"></i></div>
+            <div>
+              <strong>Vigilados</strong>
+              <span>por la Superintendencia de Economía Solidaria</span>
+            </div>
+          </div>
+          <div class="about__card about__card--2">
+            <div class="about__card-icon"><i class="fas fa-handshake"></i></div>
+            <div>
+              <strong>Economía</strong>
+              <span>Solidaria sin ánimo de lucro</span>
+            </div>
+          </div>
+          <div class="about__card about__card--3">
+            <div class="about__card-icon"><i class="fas fa-people-group"></i></div>
+            <div>
+              <strong>+500</strong>
+              <span>familias beneficiadas</span>
+            </div>
+          </div>
+          <div class="about__bg-circle"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section section--contact" id="contacto">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Estamos aquí para ti</span>
+        <h2 class="section__title">Contáctanos y<span class="gradient-text"> resolvemos tu duda</span></h2>
+        <p class="section__subtitle">Escríbenos o llámanos. Un asesor de FAMYM te atenderá en el menor tiempo posible.
+        </p>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__info">
+          <div class="contact__info-item">
+            <div class="contact__info-icon"><i class="fas fa-location-dot"></i></div>
+            <div><strong>Dirección</strong><span>Cra. 52 #14S-92 Itagüí, Antioquia</span></div>
+          </div>
+          <div class="contact__info-item">
+            <div class="contact__info-icon"><i class="fas fa-phone"></i></div>
+            <div><strong>Teléfono</strong><span>+57 310 883-6491</span></div>
+          </div>
+          <div class="contact__info-item">
+            <div class="contact__info-icon"><i class="fas fa-envelope"></i></div>
+            <div><strong>Correo electrónico</strong><span>Auxiliarfamym@montacargasamym.com</span></div>
+          </div>
+          <div class="contact__info-item">
+            <div class="contact__info-icon"><i class="fas fa-clock"></i></div>
+            <div><strong>Horario de atención</strong><span>Lun – Vie: 8:00am – 5:00pm</span></div>
+          </div>
+        </div>
+
+        <form method="POST" class="contact__form" id="contact-form">
+          {% csrf_token %}
+          <!-- Es obligatorio en Django para la seguridad de los datos que viajan atravez del metódo POST y no haya falsificacion de solicitud entre sitios -->
+          <div class="form__row">
+            <div class="form__group">
+              <label for="nombre">Nombre completo *</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+            </div>
+            <div class="form__group">
+              <label for="empresa">Área / Dependencia *</label>
+              <input type="text" id="empresa" name="empresa" placeholder="Tu área de trabajo"  required/>
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="form__group">
+              <label for="email">Correo electrónico *</label>
+              <input type="email" id="correo" name="correo" placeholder="correo@amym.com.co" required />
+            </div>
+            <div class="form__group">
+              <label for="telefono">Teléfono / Celular *</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="+57 300 000 0000" required />
+            </div>
+          </div>
+          <div class="form__group">
+            <label for="servicio">Servicio de interés *</label>
+            <select id="servicio" name="servicio" required>
+              <option value="" disabled selected>Selecciona un servicio</option>
+              <optgroup label="Líneas de Ahorro">
+                <option value="ahorro-obligatorio">Ahorro Obligatorio</option>
+                <option value="ahorro-voluntario">Ahorro Voluntario</option>
+                <option value="ahorro-vacacional">Ahorro Vacacional</option>
+                <option value="ahorro-navideno">Ahorro Navideño</option>
+              </optgroup>
+              <optgroup label="Líneas de Crédito">
+                <option value="credito-libre">Libre Inversión</option>
+                <option value="credito-educativo">Educativo</option>
+                <option value="credito-salud">Salud – Calamidad</option>
+                <option value="credito-especial">Especial</option>
+              </optgroup>
+              <optgroup label="Auxilios">
+                <option value="auxilio-escolar">Auxilio Escolar</option>
+                <option value="auxilio-nacimiento">Auxilio de Nacimiento</option>
+                <option value="auxilio-lentes">Auxilio de Lentes</option>
+                <option value="auxilio-fallecimiento">Auxilio por Fallecimiento</option>
+              </optgroup>
+              <option value="convenios">Convenios</option>
+              <option value="vinculacion">Vinculación como Asociado</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div class="form__group">
+            <label for="mensaje">Mensaje *</label>
+            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos en qué podemos ayudarte..."
+              required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full" id="submit-contact">
+            <span>Enviar mensaje</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+          <div class="form__success" id="contact-success">
+            <i class="fas fa-circle-check"></i> ¡Mensaje enviado! Te contactaremos pronto.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <span class="logo-f">F</span><span class="logo-rest">AMYM</span>
+          </div>
+          <p>Fondo de Empleados AMYM — Entidad solidaria sin ánimo de lucro vigilada por la Superintendencia de Economía
+            Solidaria.</p>
+        </div>
+        <div class="footer__links">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="{% url 'PortalAsociados' %}">Portal Asociados</a></li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#servicios">Líneas de Ahorro</a></li>
+            <li><a href="#servicios">Líneas de Crédito</a></li>
+            <li><a href="#servicios">Auxilios</a></li>
+            <li><a href="#servicios">Convenios</a></li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <h4>Contacto</h4>
+          <ul>
+            <li>Cra. 52 #14S-92 Itagüí, Antioquia</li>
+            <li>+57 310 883-64910</li>
+            <li>Auxiliarfamym@montacargasamym.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 FAMYM — Fondo de Empleados AMYM. Todos los derechos reservados.</p>
+        <p>Vigilados por la Supersolidaria — Colombia</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/script.js' %}"></script>
+  {% include "anuncios/anuncio.html" %}
+</body>
+
+</html>
