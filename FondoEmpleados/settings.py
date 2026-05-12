@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'FondoEmpleados.wsgi.application'
 # aqui va la base de datos 
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
+        'ENGINE': 'mssql_django',
         'NAME': 'Fondo_Empleados',
         'HOST': 'SQLSERVER', 
         'PORT': '1433',
