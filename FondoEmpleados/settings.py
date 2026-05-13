@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     ".trycloudflare.com",
     "127.0.0.1",
     "localhost",
+    "app.montacargasamym.com"
 ]
 
 
@@ -84,13 +85,15 @@ WSGI_APPLICATION = 'FondoEmpleados.wsgi.application'
 # aqui va la base de datos 
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql_django',
+        'ENGINE': 'mssql',
         'NAME': 'Fondo_Empleados',
         'HOST': 'SQLSERVER', 
+        'USER': 'desarrollo',
+        'PASSWORD': '4ndr3$-31',
         'PORT': '1433',
         'OPTIONS': {
             'driver': 'ODBC Driver 18 for SQL Server',
-            'extra_params': 'TrustServerCertificate=yes;'
+            'extra_params': 'Encrypt=no;TrustServerCertificate=yes;'
             
         },
     },
@@ -130,8 +133,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
-
+STATIC_URL = '/FondoEmpleados/static/'
+STATIC_ROOT = r'E:\inetpub\wwwroot\PRUEBAS\FondoEmpleados\static'
 
 #CONFIGURACION DEL CORREO DE OUTLLOOK
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -150,5 +153,5 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 #aqui se guardaran los archivos que esten subido 
-MEDIA_URL  = "/media/"
+MEDIA_URL  = "/FondoEmpleados/media/"
 MEDIA_ROOT = BASE_DIR / "media"
