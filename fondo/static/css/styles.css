@@ -42,7 +42,6 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html  { scroll-behavior: smooth; font-size: 16px; }
 body  { font-family: var(--font-body); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-/* FIX: height: auto evita que imágenes de ancho fijo rompan el layout */
 img   { max-width: 100%; height: auto; display: block; }
 a     { text-decoration: none; color: inherit; }
 ul    { list-style: none; }
@@ -57,7 +56,6 @@ input, textarea, select { font-family: var(--font-body); }
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
-  /* FIX: evita que el container se expanda más allá del viewport */
   width: 100%;
 }
 .gradient-text {
@@ -85,25 +83,17 @@ input, textarea, select { font-family: var(--font-body); }
 
 
 /* ============================================================
-   3b. CONTENCIÓN DE DESBORDAMIENTO — ESCALABLE
-   Cada sección se autocontiene. No se toca html ni body,
-   lo que preserva position:sticky, fixed y scroll programático.
+   3b. CONTENCIÓN DE DESBORDAMIENTO
    ============================================================ */
-
-/* Las shapes decorativas quedan recortadas dentro de su wrapper,
-   no dentro de .hero, para no afectar hijos con position:sticky */
 .hero__bg-shapes {
   overflow: hidden;
 }
 
-/* Las cards absolutas de "nosotros" no se salen del contenedor visual */
+/* Desktop: about__visual contiene las cards absolutas */
 .about__visual {
   overflow: hidden;
 }
 
-/* Regla defensiva para todos los grids y flex: evita que un hijo
-   infle el padre más allá del ancho disponible (problema clásico
-   de flexbox/grid sin min-width:0) */
 .tabs__nav,
 .zonas-nav,
 .convenios-grid,
@@ -121,7 +111,6 @@ input, textarea, select { font-family: var(--font-body); }
   min-width: 0;
 }
 
-/* Cada celda de grid también respeta su contenedor */
 .ahorro-card,
 .credito-card,
 .auxilio-card,
@@ -200,17 +189,12 @@ input, textarea, select { font-family: var(--font-body); }
   min-height: 100vh;
   background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 60%, #0d2d5e 100%);
   position: relative;
-  /* FIX: overflow:hidden aquí contiene el fondo animado pero NO
-     afecta elementos externos porque hero es position:relative,
-     no el ancestro de ningún fixed/sticky de otras secciones */
   overflow: hidden;
   display: flex; align-items: center;
   padding-top: 70px;
 }
 .hero__bg-shapes {
   position: absolute; inset: 0; pointer-events: none;
-  /* FIX: segunda línea de defensa — las shapes quedan recortadas
-     aquí antes de llegar al borde de .hero */
   overflow: hidden;
 }
 .shape {
@@ -298,8 +282,11 @@ input, textarea, select { font-family: var(--font-body); }
    8. BANNER SLIDER
    ============================================================ */
 .banner-slider {
-  position: relative; border-radius: var(--radius-lg);
-  overflow: hidden; box-shadow: var(--shadow-lg); margin: 40px 0;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  margin: 40px 0;
 }
 .banner-slider__container  { position: relative; width: 100%; }
 .banner-slide              { display: none; }
@@ -307,7 +294,6 @@ input, textarea, select { font-family: var(--font-body); }
 .banner-slide__placeholder {
   position: relative;
   overflow: hidden;
-  /* Relación 1774:887 ≈ 2:1 — se ajusta automáticamente al ancho */
   aspect-ratio: 1774 / 887;
 }
 .banner-slide__placeholder::after {
@@ -316,13 +302,13 @@ input, textarea, select { font-family: var(--font-body); }
 }
 .banner-placeholder-content {
   width: 100%;
-  height: 100%;               /* ← esto faltaba, sin esto el img no tiene referencia */
+  height: 100%;
   display: block;
 }
 .banner-slide__img {
   width: 100%;
   height: 100%;
-  object-fit: fill;   /* estira para llenar SIN recortar */
+  object-fit: fill;
   display: block;
 }
 
@@ -354,8 +340,6 @@ input, textarea, select { font-family: var(--font-body); }
   box-shadow: 0 8px 32px rgba(10,22,40,0.18);
   border: 1px solid rgba(255,255,255,0.06);
   position: relative;
-  /* FIX: min-width:0 evita que el flex container se expanda
-     más allá de su padre cuando hay muchos tabs */
   min-width: 0;
 }
 .tabs__nav::-webkit-scrollbar { display: none; }
@@ -368,7 +352,6 @@ input, textarea, select { font-family: var(--font-body); }
   font-size: 0.88rem; font-weight: 600; white-space: nowrap;
   transition: var(--transition); flex-shrink: 0;
   position: relative; cursor: pointer; letter-spacing: 0.01em;
-  /* FIX: min-width:0 en cada hijo de flex para que no inflen el padre */
   min-width: 0;
 }
 .tab-btn:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.8); }
@@ -576,7 +559,6 @@ input, textarea, select { font-family: var(--font-body); }
 .zona-btn__arrow { font-size: 10px; color: var(--text-muted); transition: transform 0.2s ease; }
 .zona-btn.active .zona-btn__arrow { transform: rotate(180deg); }
 
-/* Fix icono zona-btn */
 .zona-btn .ahorro-card__icon        { background: rgba(26,86,219,0.08); color: var(--primary); }
 .zona-btn.active .ahorro-card__icon { background: rgba(26,86,219,0.15); }
 
@@ -607,7 +589,6 @@ input, textarea, select { font-family: var(--font-body); }
   border: 3px solid #d1e8d1; background: #f4faf6;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden; margin: 0 auto 8px;
-  /* FIX: flex-shrink:0 evita que el logo se comprima en grids estrechos */
   flex-shrink: 0;
 }
 .convenio-card__logo img  { width: 85%; height: 85%; object-fit: contain; scale: 1.2; }
@@ -693,9 +674,8 @@ input, textarea, select { font-family: var(--font-body); }
 .value-item strong { color: var(--white); display: block; margin-bottom: 4px; font-size: 0.95rem; }
 .value-item p      { color: rgba(255,255,255,0.55); font-size: 0.88rem; line-height: 1.6; }
 .about__visual {
-  position: relative; height: 380px;
-  /* FIX: las cards absolutas quedan recortadas aquí,
-     sin afectar nada fuera de esta columna */
+  position: relative;
+  height: 380px;
   overflow: hidden;
 }
 .about__card {
@@ -745,7 +725,6 @@ input, textarea, select { font-family: var(--font-body); }
   border-radius: var(--radius-sm); font-size: 0.9rem;
   color: var(--text); background: var(--white);
   outline: none; transition: var(--transition);
-  /* FIX: width:100% evita que inputs con padding se salgan de su contenedor */
   width: 100%;
 }
 .form__group input:focus,
@@ -837,7 +816,7 @@ input, textarea, select { font-family: var(--font-body); }
    ============================================================ */
 @media (max-width: 1024px) {
   .about__grid   { grid-template-columns: 1fr; gap: 48px; }
-  .about__visual { height: 280px; }
+  .about__visual { height: 280px; overflow: hidden; }
   .contact__grid { grid-template-columns: 1fr; gap: 40px; }
   .footer__grid  { grid-template-columns: 1fr 1fr; }
 }
@@ -871,6 +850,21 @@ input, textarea, select { font-family: var(--font-body); }
   .btn            { width: 100%; justify-content: center; }
   .hero__actions .btn { width: auto; }
 
+  /* Banner — respeta el container, sin márgenes negativos */
+  .banner-slider {
+    margin: 24px 0;
+    border-radius: var(--radius);
+  }
+  .banner-slide__placeholder {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+  .banner-slide__img {
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+  }
+
   /* Tabs */
   .tabs__nav { padding: 6px; }
   .tab-btn   { padding: 10px 14px; font-size: 0.82rem; }
@@ -880,20 +874,20 @@ input, textarea, select { font-family: var(--font-body); }
   /* Ahorro */
   .ahorro-grid { grid-template-columns: 1fr; }
 
-  /* Zonas — 3 columnas */
-.zonas-nav {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  scrollbar-width: none;
-  gap: 10px;
-  padding-bottom: 6px;
-}
-.zonas-nav::-webkit-scrollbar { display: none; }
-.zona-btn       { flex: 0 0 120px; padding: 14px 8px 12px; }
-.zona-btn__icon { width: 40px; height: 40px; font-size: 16px; }
-.zona-btn__name { font-size: 11px; }
-.zona-btn__sub  { font-size: 10px; }
+  /* Zonas — scroll horizontal */
+  .zonas-nav {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 10px;
+    padding-bottom: 6px;
+  }
+  .zonas-nav::-webkit-scrollbar { display: none; }
+  .zona-btn       { flex: 0 0 120px; padding: 14px 8px 12px; }
+  .zona-btn__icon { width: 40px; height: 40px; font-size: 16px; }
+  .zona-btn__name { font-size: 11px; }
+  .zona-btn__sub  { font-size: 10px; }
 
   /* Convenios — 2 columnas */
   .convenios-grid,
@@ -911,7 +905,16 @@ input, textarea, select { font-family: var(--font-body); }
   .about__card--2 { width: 90%; }
   .about__card--3 { width: 75%; }
 
-
+  /* About visual — sin recorte en móvil */
+  .about__visual {
+    height: auto;
+    min-height: 320px;
+    overflow: visible;
+    padding-bottom: 100px;
+  }
+  .about__card        { padding: 14px 16px; gap: 10px; }
+  .about__card strong { font-size: 0.88rem; }
+  .about__card span   { font-size: 0.75rem; }
 }
 
 
@@ -935,38 +938,53 @@ input, textarea, select { font-family: var(--font-body); }
   .section__title    { font-size: 1.7rem; }
   .section__subtitle { font-size: 0.92rem; }
 
+  /* Banner */
+  .banner-slider {
+    margin: 16px 0;
+    border-radius: var(--radius);
+  }
+  .banner-slide__placeholder {
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+  .banner-slide__img {
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+  }
+  .banner-slider__btn { width: 36px; height: 36px; font-size: 0.9rem; }
+
   /* Tabs — solo iconos */
   .tabs__nav { gap: 4px; padding: 6px; }
   .tab-btn   { padding: 10px 8px; min-width: 0; }
   .tab-btn__icon { font-size: 1.2rem; }
 
-
-/* Zonas — lista vertical */
-.zonas-nav {
-  display: flex;
-  flex-direction: column;
-  overflow-x: unset;
-  gap: 8px;
-}
-.zona-btn {
-  flex: unset;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 12px 16px;
-  border-radius: var(--radius);
-  gap: 14px;
-}
-.zona-btn__icon  { width: 36px; height: 36px; font-size: 14px; flex-shrink: 0; }
-.zona-btn__name  { font-size: 13px; }
-.zona-btn__sub   { font-size: 11px; display: block; }
-.zona-btn__arrow { margin-left: auto; display: block; }
+  /* Zonas — lista vertical */
+  .zonas-nav {
+    display: flex;
+    flex-direction: column;
+    overflow-x: unset;
+    gap: 8px;
+  }
+  .zona-btn {
+    flex: unset;
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    gap: 14px;
+  }
+  .zona-btn__icon  { width: 36px; height: 36px; font-size: 14px; flex-shrink: 0; }
+  .zona-btn__name  { font-size: 13px; }
+  .zona-btn__sub   { font-size: 11px; display: block; }
+  .zona-btn__arrow { margin-left: auto; display: block; }
 
   /* Panel compacto */
   .zona-panel__title { font-size: 0.88rem; }
   .zona-panel__count { font-size: 0.72rem; }
 
-  /* Convenios — 2 col verticales */
+  /* Convenios — 2 col */
   .convenios-grid,
   .grid-flexible       { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .convenio-card       { flex-direction: column; text-align: center; padding: 16px 10px 12px; gap: 6px; }
@@ -974,8 +992,8 @@ input, textarea, select { font-family: var(--font-body); }
   .convenio-card__footer { margin-top: 6px; padding-top: 6px; }
 
   /* Ahorro */
-  .ahorro-card           { padding: 20px; }
-  .ahorro-card__icon     { width: 44px; height: 44px; font-size: 1.1rem; }
+  .ahorro-card            { padding: 20px; }
+  .ahorro-card__icon      { width: 44px; height: 44px; font-size: 1.1rem; }
   .ahorro-card__header h3 { font-size: 0.95rem; }
 
   /* Crédito */
@@ -988,14 +1006,21 @@ input, textarea, select { font-family: var(--font-body); }
   .auxilio-card  { padding: 20px; }
 
   /* Bono */
-  .bono-solidario      { padding: 20px; gap: 16px; }
+  .bono-solidario       { padding: 20px; gap: 16px; }
   .bono-solidario__icon { font-size: 2rem; }
 
+  /* About visual */
+  .about__visual {
+    min-height: 280px;
+    overflow: visible;
+    padding-bottom: 90px;
+  }
+
   /* Contacto */
-  .contact__info-icon    { width: 40px; height: 40px; font-size: 1.1rem; }
+  .contact__info-icon   { width: 40px; height: 40px; font-size: 1.1rem; }
   .form__group input,
   .form__group select,
-  .form__group textarea  { font-size: 0.85rem; padding: 10px 12px; }
+  .form__group textarea { font-size: 0.85rem; padding: 10px 12px; }
 
   /* Modal */
   .modal__content { padding: 20px 16px 16px; max-width: 100%; }
@@ -1006,55 +1031,7 @@ input, textarea, select { font-family: var(--font-body); }
   .footer__grid { gap: 24px; }
   .footer__logo { font-size: 1.6rem; }
 
-  /* Banner */
-  .banner-slider             { margin: 20px 0; border-radius: var(--radius); }
-  .banner-slide__img         { border-radius: var(--radius); } /* solo mantén el border-radius */
-  .banner-slide__placeholder { height: 180px; }
-  .banner-slider__btn        { width: 36px; height: 36px; font-size: 0.9rem; }
-
   /* Tab intro */
   .tab-intro   { padding: 14px 16px; }
   .tab-intro p { font-size: 0.88rem; }
-
-
-
-@media (max-width: 768px) {
-  .banner-slider {
-    margin: 24px -16px;
-    border-radius: 0;
-  }
-  .banner-slide__placeholder {
-    aspect-ratio: 16 / 9;
-  }
-  .banner-slide__img {
-    object-fit: cover;
-  }
-  .about__visual {
-    height: auto;
-    min-height: 320px;
-    overflow: visible;
-    padding-bottom: 100px;
-  }
-  .about__card {
-    padding: 14px 16px;
-    gap: 10px;
-  }
-  .about__card strong { font-size: 0.88rem; }
-  .about__card span   { font-size: 0.75rem; }
-}
-
-@media (max-width: 480px) {
-  .banner-slider {
-    margin: 16px -12px;
-    border-radius: 0;
-  }
-  .banner-slide__placeholder {
-    aspect-ratio: 4 / 3;
-    height: auto;
-  }
-  .about__visual {
-    min-height: 280px;
-    padding-bottom: 90px;
-  }
-}
 }
