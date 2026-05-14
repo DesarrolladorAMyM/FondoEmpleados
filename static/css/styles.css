@@ -1,13 +1,4 @@
-/* ============================================================
-   AZS — STYLESHEET
-   Organizado por: Variables → Reset → Utils → Componentes
-                   → Secciones → Responsive
-   ============================================================ */
-
-
-/* ============================================================
-   1. VARIABLES
-   ============================================================ */
+/* VARIABLES */
 :root {
   /* Colores */
   --primary:       #1a56db;
@@ -51,7 +42,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html  { scroll-behavior: smooth; font-size: 16px; }
 body  { font-family: var(--font-body); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-img   { max-width: 100%; display: block; }
+/* FIX: height: auto evita que imágenes de ancho fijo rompan el layout */
+img   { max-width: 100%; height: auto; display: block; }
 a     { text-decoration: none; color: inherit; }
 ul    { list-style: none; }
 button { cursor: pointer; font-family: var(--font-body); }
@@ -65,6 +57,8 @@ input, textarea, select { font-family: var(--font-body); }
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+  /* FIX: evita que el container se expanda más allá del viewport */
+  width: 100%;
 }
 .gradient-text {
   background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
@@ -88,6 +82,53 @@ input, textarea, select { font-family: var(--font-body); }
   50%       { transform: translateY(-8px); }
 }
 .fade-in { animation: fadeInUp 0.7s ease both; }
+
+
+/* ============================================================
+   3b. CONTENCIÓN DE DESBORDAMIENTO — ESCALABLE
+   Cada sección se autocontiene. No se toca html ni body,
+   lo que preserva position:sticky, fixed y scroll programático.
+   ============================================================ */
+
+/* Las shapes decorativas quedan recortadas dentro de su wrapper,
+   no dentro de .hero, para no afectar hijos con position:sticky */
+.hero__bg-shapes {
+  overflow: hidden;
+}
+
+/* Las cards absolutas de "nosotros" no se salen del contenedor visual */
+.about__visual {
+  overflow: hidden;
+}
+
+/* Regla defensiva para todos los grids y flex: evita que un hijo
+   infle el padre más allá del ancho disponible (problema clásico
+   de flexbox/grid sin min-width:0) */
+.tabs__nav,
+.zonas-nav,
+.convenios-grid,
+.grid-flexible,
+.ahorro-grid,
+.credito-grid,
+.auxilios-grid,
+.footer__grid,
+.contact__grid,
+.about__grid,
+.hero__stats,
+.hero__actions,
+.bono-details,
+.credito-features__grid {
+  min-width: 0;
+}
+
+/* Cada celda de grid también respeta su contenedor */
+.ahorro-card,
+.credito-card,
+.auxilio-card,
+.convenio-card,
+.zona-btn {
+  min-width: 0;
+}
 
 
 /* ============================================================
@@ -158,11 +199,20 @@ input, textarea, select { font-family: var(--font-body); }
 .hero {
   min-height: 100vh;
   background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 60%, #0d2d5e 100%);
-  position: relative; overflow: hidden;
+  position: relative;
+  /* FIX: overflow:hidden aquí contiene el fondo animado pero NO
+     afecta elementos externos porque hero es position:relative,
+     no el ancestro de ningún fixed/sticky de otras secciones */
+  overflow: hidden;
   display: flex; align-items: center;
   padding-top: 70px;
 }
-.hero__bg-shapes { position: absolute; inset: 0; pointer-events: none; }
+.hero__bg-shapes {
+  position: absolute; inset: 0; pointer-events: none;
+  /* FIX: segunda línea de defensa — las shapes quedan recortadas
+     aquí antes de llegar al borde de .hero */
+  overflow: hidden;
+}
 .shape {
   position: absolute; border-radius: 50%;
   filter: blur(80px); opacity: 0.15;
@@ -290,6 +340,9 @@ input, textarea, select { font-family: var(--font-body); }
   box-shadow: 0 8px 32px rgba(10,22,40,0.18);
   border: 1px solid rgba(255,255,255,0.06);
   position: relative;
+  /* FIX: min-width:0 evita que el flex container se expanda
+     más allá de su padre cuando hay muchos tabs */
+  min-width: 0;
 }
 .tabs__nav::-webkit-scrollbar { display: none; }
 
@@ -301,6 +354,8 @@ input, textarea, select { font-family: var(--font-body); }
   font-size: 0.88rem; font-weight: 600; white-space: nowrap;
   transition: var(--transition); flex-shrink: 0;
   position: relative; cursor: pointer; letter-spacing: 0.01em;
+  /* FIX: min-width:0 en cada hijo de flex para que no inflen el padre */
+  min-width: 0;
 }
 .tab-btn:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.8); }
 .tab-btn::after {
@@ -366,11 +421,12 @@ input, textarea, select { font-family: var(--font-body); }
 /* ============================================================
    10. TAB — AHORRO
    ============================================================ */
-.ahorro-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.ahorro-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; min-width: 0; }
 .ahorro-card {
   background: #eef4ff; border: 1px solid #c3d7fb;
   border-radius: var(--radius); padding: 28px;
   box-shadow: var(--shadow); transition: var(--transition);
+  min-width: 0;
 }
 .ahorro-card__header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
 .ahorro-card__icon {
@@ -402,13 +458,14 @@ input, textarea, select { font-family: var(--font-body); }
    ============================================================ */
 .credito-features        { background: var(--surface); border-radius: var(--radius); padding: 28px; margin-bottom: 36px; }
 .credito-features__title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 16px; }
-.credito-features__grid  { display: flex; flex-wrap: wrap; gap: 10px; }
+.credito-features__grid  { display: flex; flex-wrap: wrap; gap: 10px; min-width: 0; }
 .feature-chip { background: linear-gradient(135deg, rgba(26,86,219,0.06), rgba(0,198,184,0.06)); border: 1px solid var(--border); padding: 8px 16px; border-radius: 100px; font-size: 0.85rem; color: var(--text); font-weight: 500; }
-.credito-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 36px; }
+.credito-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 36px; min-width: 0; }
 .credito-card {
   background: #edfaf5; border: 1px solid #6ee7b7;
   border-radius: var(--radius); padding: 28px;
   text-align: center; transition: var(--transition); box-shadow: var(--shadow);
+  min-width: 0;
 }
 .credito-card__icon {
   font-size: 1.6rem; width: 60px; height: 60px;
@@ -429,18 +486,19 @@ input, textarea, select { font-family: var(--font-body); }
 .bono-solidario__icon       { font-size: 3rem; flex-shrink: 0; }
 .bono-solidario__content h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
 .bono-solidario__content p  { font-size: 0.9rem; color: var(--text-light); margin-bottom: 16px; line-height: 1.6; }
-.bono-details      { display: flex; flex-wrap: wrap; gap: 12px; }
+.bono-details      { display: flex; flex-wrap: wrap; gap: 12px; min-width: 0; }
 .bono-details span { background: white; border: 1px solid #bbf7d0; border-radius: var(--radius-sm); padding: 8px 16px; font-size: 0.85rem; color: var(--text); }
 
 
 /* ============================================================
    12. TAB — AUXILIOS
    ============================================================ */
-.auxilios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+.auxilios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; min-width: 0; }
 .auxilio-card {
   background: #fff8eb; border: 2px solid #fcd490;
   border-radius: var(--radius); padding: 28px;
   transition: var(--transition); box-shadow: var(--shadow);
+  min-width: 0;
 }
 .auxilio-card__icon {
   font-size: 1.4rem; width: 56px; height: 56px;
@@ -462,15 +520,20 @@ input, textarea, select { font-family: var(--font-body); }
    13. TAB — CONVENIOS
    ============================================================ */
 .zonas-nav {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 14px; margin-bottom: 28px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+  min-width: 0;
 }
+
 .zona-btn {
   background: var(--white); border: 1.5px solid var(--border);
   border-radius: var(--radius-lg); padding: 20px 12px 16px;
   cursor: pointer; text-align: center;
   display: flex; flex-direction: column; align-items: center; gap: 8px;
   transition: var(--transition); position: relative; overflow: hidden;
+  min-width: 0;
 }
 .zona-btn::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0;
@@ -515,7 +578,7 @@ input, textarea, select { font-family: var(--font-body); }
 .zona-panel__count { font-size: 0.8rem; color: var(--text-muted); margin-left: auto; }
 
 .convenios-grid,
-.grid-flexible { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.grid-flexible { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; min-width: 0; }
 
 .convenio-card {
   background: #f0eeff; border: 1.5px solid #c4b5fd;
@@ -523,12 +586,15 @@ input, textarea, select { font-family: var(--font-body); }
   text-align: center; transition: var(--transition);
   box-shadow: 0 2px 12px rgba(0,160,100,0.07);
   cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  min-width: 0;
 }
 .convenio-card__logo {
   width: 100px; height: 100px; border-radius: 50%;
   border: 3px solid #d1e8d1; background: #f4faf6;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden; margin: 0 auto 8px;
+  /* FIX: flex-shrink:0 evita que el logo se comprima en grids estrechos */
+  flex-shrink: 0;
 }
 .convenio-card__logo img  { width: 85%; height: 85%; object-fit: contain; scale: 1.2; }
 .convenio-card__name      { font-weight: 700; font-size: 0.92rem; color: var(--text); }
@@ -605,14 +671,19 @@ input, textarea, select { font-family: var(--font-body); }
 /* ============================================================
    15. NOSOTROS
    ============================================================ */
-.about__grid   { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about__grid   { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; min-width: 0; }
 .about__text   { color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.8; margin-bottom: 20px; }
 .about__values { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
 .value-item    { display: flex; gap: 16px; align-items: flex-start; }
 .value-item__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
 .value-item strong { color: var(--white); display: block; margin-bottom: 4px; font-size: 0.95rem; }
 .value-item p      { color: rgba(255,255,255,0.55); font-size: 0.88rem; line-height: 1.6; }
-.about__visual { position: relative; height: 380px; }
+.about__visual {
+  position: relative; height: 380px;
+  /* FIX: las cards absolutas quedan recortadas aquí,
+     sin afectar nada fuera de esta columna */
+  overflow: hidden;
+}
 .about__card {
   position: absolute;
   background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
@@ -638,7 +709,7 @@ input, textarea, select { font-family: var(--font-body); }
 /* ============================================================
    16. CONTACTO
    ============================================================ */
-.contact__grid      { display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; }
+.contact__grid      { display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; min-width: 0; }
 .contact__info      { display: flex; flex-direction: column; gap: 24px; }
 .contact__info-item { display: flex; gap: 16px; align-items: flex-start; }
 .contact__info-icon {
@@ -660,6 +731,8 @@ input, textarea, select { font-family: var(--font-body); }
   border-radius: var(--radius-sm); font-size: 0.9rem;
   color: var(--text); background: var(--white);
   outline: none; transition: var(--transition);
+  /* FIX: width:100% evita que inputs con padding se salgan de su contenedor */
+  width: 100%;
 }
 .form__group input:focus,
 .form__group select:focus,
@@ -727,6 +800,7 @@ input, textarea, select { font-family: var(--font-body); }
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 48px; padding-bottom: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
+  min-width: 0;
 }
 .footer__logo    { font-family: var(--font-display); font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
 .logo-f          { color: var(--accent); }
@@ -793,11 +867,19 @@ input, textarea, select { font-family: var(--font-body); }
   .ahorro-grid { grid-template-columns: 1fr; }
 
   /* Zonas — 3 columnas */
-  .zonas-nav      { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .zona-btn       { padding: 14px 8px 12px; }
-  .zona-btn__icon { width: 40px; height: 40px; font-size: 16px; }
-  .zona-btn__name { font-size: 11px; }
-  .zona-btn__sub  { font-size: 10px; }
+.zonas-nav {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 10px;
+  padding-bottom: 6px;
+}
+.zonas-nav::-webkit-scrollbar { display: none; }
+.zona-btn       { flex: 0 0 120px; padding: 14px 8px 12px; }
+.zona-btn__icon { width: 40px; height: 40px; font-size: 16px; }
+.zona-btn__name { font-size: 11px; }
+.zona-btn__sub  { font-size: 10px; }
 
   /* Convenios — 2 columnas */
   .convenios-grid,
@@ -846,13 +928,27 @@ input, textarea, select { font-family: var(--font-body); }
   .tab-btn   { padding: 10px 8px; min-width: 0; }
   .tab-btn__icon { font-size: 1.2rem; }
 
-  /* Zonas — 2 columnas */
-  .zonas-nav       { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .zona-btn        { padding: 12px 6px 10px; border-radius: var(--radius); }
-  .zona-btn__icon  { width: 36px; height: 36px; font-size: 14px; }
-  .zona-btn__name  { font-size: 10px; }
-  .zona-btn__sub   { display: none; }
-  .zona-btn__arrow { display: none; }
+
+/* Zonas — lista vertical */
+.zonas-nav {
+  display: flex;
+  flex-direction: column;
+  overflow-x: unset;
+  gap: 8px;
+}
+.zona-btn {
+  flex: unset;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  gap: 14px;
+}
+.zona-btn__icon  { width: 36px; height: 36px; font-size: 14px; flex-shrink: 0; }
+.zona-btn__name  { font-size: 13px; }
+.zona-btn__sub   { font-size: 11px; display: block; }
+.zona-btn__arrow { margin-left: auto; display: block; }
 
   /* Panel compacto */
   .zona-panel__title { font-size: 0.88rem; }
