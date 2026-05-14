@@ -1035,3 +1035,30 @@ input, textarea, select { font-family: var(--font-body); }
   .tab-intro   { padding: 14px 16px; }
   .tab-intro p { font-size: 0.88rem; }
 }
+/* ============================================================
+   22. FIX GLOBAL — scroll horizontal y about cards
+   ============================================================ */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .about__visual {
+    height: auto;
+    min-height: unset;
+    overflow: visible;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .about__card {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100% !important;
+  }
+  .about__bg-circle { display: none; }
+}
