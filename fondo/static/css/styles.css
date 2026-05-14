@@ -1015,4 +1015,46 @@ input, textarea, select { font-family: var(--font-body); }
   /* Tab intro */
   .tab-intro   { padding: 14px 16px; }
   .tab-intro p { font-size: 0.88rem; }
+
+
+
+@media (max-width: 768px) {
+  .banner-slider {
+    margin: 24px -16px;
+    border-radius: 0;
+  }
+  .banner-slide__placeholder {
+    aspect-ratio: 16 / 9;
+  }
+  .banner-slide__img {
+    object-fit: cover;
+  }
+  .about__visual {
+    height: auto;
+    min-height: 320px;
+    overflow: visible;
+    padding-bottom: 100px;
+  }
+  .about__card {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+  .about__card strong { font-size: 0.88rem; }
+  .about__card span   { font-size: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  .banner-slider {
+    margin: 16px -12px;
+    border-radius: 0;
+  }
+  .banner-slide__placeholder {
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+  .about__visual {
+    min-height: 280px;
+    padding-bottom: 90px;
+  }
+}
 }
