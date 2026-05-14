@@ -1,59 +1,39 @@
 from django.contrib import admin
-from .models import MensajeContacto
+from django.utils.html import format_html
+from .models import Banner,MensajeContacto
 
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ['titulo', 'preview_imagen', 'activo', 'orden']
+    list_editable = ['activo', 'orden']
+    list_display_links = ['titulo']
+
+    def preview_imagen(self, obj):
+        if obj.imagen:
+            return format_html(
+                '<img src="{}" style="height:60px; border-radius:6px; object-fit:cover; width:120px;" />',
+                obj.imagen.url
+            )
+        return "Sin imagen"
+    preview_imagen.short_description = "Vista previa"
+    
+    
+    
+    
 
 @admin.register(MensajeContacto)
 class MensajeContactoAdmin(admin.ModelAdmin):
-
-    # COLUMNAS QUE SE VEN EN LA LISTA
-    list_display = [
-        'Nombre',
-        'Empresa',
-        'Correo',
-        'Telefono',
-        'Servicio',
-        'Fecha_envio',
-    ]
-
-    # CAMPOS POR LOS QUE PUEDES BUSCAR 
-    search_fields = [
-        'Nombre',
-        'Empresa',
-        'Correo',
-        'Servicio',
-    ]
-
-    #FILTROS EN LA BARRA LATERAL DERECHA
-    list_filter = [
-        'Servicio',
-        'Fecha_envio',
-    ]
-
-    # ORDEN POR DEFECTO 
-    ordering = ['-Fecha_envio']
-
-    # CAMPOS DE SOLO LECTURA
-    readonly_fields = ['Fecha_envio']
-
-    #CÓMO SE VE EL FORMULARIO DE DETALLE 
-    fieldsets = (
-        ('Datos de Contacto', {
-            'fields': (
-                'Nombre',
-                'Empresa',
-                'Correo',
-                'Telefono',
-                'Servicio',
-            )
-        }),
-        ('Mensaje', {
-            'fields': (
-                'Mensaje',
-            )
-        }),
-        ('Fecha', {
-            'fields': (
-                'Fecha_envio',
-            )
-        }),
-    )
+    
+    list_display = ('Nombre', 'Empresa', 'Correo', 'Telefono', 'Servicio', 'Fecha_envio')
+    list_filter = ('Servicio', 'Fecha_envio')
+    search_fields = ('Nombre', 'Empresa', 'Correo')
+    ordering = ('-Fecha_envio',)
+    
+    readonly_fields = ('Nombre', 'Empresa', 'Correo', 'Telefono', 'Servicio', 'Mensaje', 'Fecha_envio')
+    
+    def has_add_permission(self, request):
+        return False
+    
+    def has_delete_permission(self, request, obj=None):
+        return False

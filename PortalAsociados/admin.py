@@ -1,92 +1,58 @@
 from django.contrib import admin
 from .models import SolicitudActualizacion
 
-
 @admin.register(SolicitudActualizacion)
 class SolicitudActualizacionAdmin(admin.ModelAdmin):
 
-    #COLUMNAS QUE SE VEN EN LA LISTA 
-    list_display = [
-        'Numero_radicado',
-        'P_nombre',
-        'P_apellido',
-        'Numero_documento',
-        'Celular',
-        'Fecha_envio',
-    ]
+    # Columnas visibles en la lista
+    list_display = (
+        'Numero_radicado', 'P_nombre', 'P_apellido',
+        'Numero_documento', 'Celular', 'Ciudad',
+        'Fuentes_recursos', 'Fecha_envio'
+    )
 
-    #CAMPOS POR LOS QUE PUEDES BUSCAR
-    search_fields = [
-        'Numero_radicado',
-        'P_nombre',
-        'P_apellido',
-        'Numero_documento',
-        'Correo_registrado',
-        'Celular',
-    ]
+    # Filtros laterales
+    list_filter = ('Genero', 'Departamento', 'Declarante_renta', 'PeP', 'Fuentes_recursos', 'Año')
 
-    #FILTROS EN LA BARRA LATERAL DERECHA
-    list_filter = [
-        'Tipo_documento',
-        'Genero',
-        'Departamento',
-        'Fuentes_recursos',
-        'Fuentes_recursos_otro',
-        'Declarante_renta',
-        'PeP',
-        'Fecha_envio',
-    ]
+    # Barra de búsqueda
+    search_fields = ('P_nombre', 'P_apellido', 'Numero_documento', 'Correo_registrado', 'Numero_radicado')
 
-    #ORDEN POR DEFECTO 
-    ordering = ['-Fecha_envio']
+    # Todos los campos como solo lectura
+    readonly_fields = (
+        'Tipo_documento', 'Numero_documento', 'Correo_registrado',
+        'P_nombre', 'S_nombre', 'P_apellido', 'S_apellido',
+        'Fecha_nacimiento', 'Genero', 'Celular', 'Telefono_fijo',
+        'Departamento', 'Ciudad', 'Direccion',
+        'Residencia_fiscal', 'Residencia_fiscal_pais',
+        'Patrimonio', 'Declarante_renta', 'PeP', 'Observaciones',
+        'Numero_radicado', 'Año', 'Fuentes_recursos',
+        'Fuentes_recursos_otro', 'Fecha_envio'
+    )
 
-    #CAMPOS DE SOLO LECTURA
-    readonly_fields = ['Fecha_envio', 'Numero_radicado']
-
-    # CÓMO SE VE EL FORMULARIO DE DETALLE 
+    # Organizar el detalle por secciones
     fieldsets = (
         ('Identificación', {
-            'fields': (
-                'Numero_radicado',
-                'Tipo_documento',
-                'Numero_documento',
-                'Correo_registrado',
-            )
+            'fields': ('Tipo_documento', 'Numero_documento', 'Correo_registrado', 'Numero_radicado', 'Año')
         }),
         ('Datos Personales', {
             'fields': (
-                'P_nombre',
-                'S_nombre',
-                'P_apellido',
-                'S_apellido',
-                'Fecha_nacimiento',
-                'Genero',
-                'Celular',
-                'Telefono_fijo',
-                
+                'P_nombre', 'S_nombre', 'P_apellido', 'S_apellido',
+                'Fecha_nacimiento', 'Genero', 'Celular', 'Telefono_fijo'
             )
         }),
         ('Ubicación', {
-            'fields': (
-                'Departamento',
-                'Ciudad',
-                'Direccion',
-            )
+            'fields': ('Departamento', 'Ciudad', 'Direccion', 'Residencia_fiscal', 'Residencia_fiscal_pais')
         }),
-        
-        ('Información Económica', {
-            'fields': (
-                'Fuentes_recursos',
-                'Fuentes_recursos_otro'
-                'Patrimonio',
-                'Declarante_renta',
-                'PeP',
-            )
+        ('Información Financiera', {
+            'fields': ('Patrimonio', 'Declarante_renta', 'Fuentes_recursos', 'Fuentes_recursos_otro')
         }),
-        ('Observaciones y Fecha', {
-            'fields': (
-                'Observaciones',
-                'Fecha_envio',
-            )
+        ('Otros', {
+            'fields': ('PeP', 'Observaciones', 'Fecha_envio')
         }),
     )
+
+    def has_add_permission(self, _request):
+        return False
+
+    def has_delete_permission(self, _request, obj=None):
+        return False

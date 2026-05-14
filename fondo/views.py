@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.mail import EmailMultiAlternatives  # PERMITE ENVIAR CORREOS EN HTML O TEXTO PLANO
 from django.conf import settings                     # ACCESO A LA CONFIGURACIÓN DE settings.py
 from django.http import JsonResponse                 # RESPONDE CON JSON AL fetch() DEL JS
-from .models import MensajeContacto                  # IMPORTAMOS EL MODELO
+from .models import MensajeContacto,Banner                # IMPORTAMOS EL MODELO
 
 
 # ══════════════════════════════════════════════════
@@ -184,4 +184,7 @@ Mensaje:
 
         return JsonResponse({'ok': True})
 
-    return render(request, "fondo/index.html")
+    banners = Banner.objects.filter(activo=True).order_by('orden')
+    return render(request, "fondo/index.html", {
+        'banners': banners,
+    })

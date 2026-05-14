@@ -95,52 +95,44 @@
   </section>
 
   <!--  BANNER SLIDER -->
-  <section class="section section--banner">
-    <div class="container">
-      <div class="banner-slider" id="main-banner">
-        <div class="banner-slider__container" id="banner-track">
+<section class="section section--banner">
+  <div class="container">
+    <div class="banner-slider" id="main-banner">
+      <div class="banner-slider__container" id="banner-track">
 
-          <div class="banner-slide active">
-            <div class="banner-slide__placeholder" style="background:linear-gradient(135deg,#0a1628 0%,#1e4d8c 100%);">
-              <div class="banner-placeholder-content">
-                <img src="{% static 'img/asociado1.png' %}" alt="Banner FAMYM" class="banner-slide__img" />
-              </div>
+        {% for banner in banners %}
+        <div class="banner-slide {% if forloop.first %}active{% endif %}">
+          <div class="banner-slide__placeholder">
+            <div class="banner-placeholder-content">
+              <img src="{{ banner.imagen.url }}" alt="{{ banner.titulo }}" class="banner-slide__img" />
             </div>
           </div>
-
-          <div class="banner-slide">
-            <div class="banner-slide__placeholder" style="background:linear-gradient(135deg,#1e4d8c 0%,#2980ef 100%);">
-              <div class="banner-placeholder-content">
-                <img src="{% static 'img/asociados2.png' %}" alt="Banner 2" class="banner-slide__img" />
-              </div>
-            </div>
-          </div>
-
-          <div class="banner-slide">
-            <div class="banner-slide__placeholder" style="background:linear-gradient(135deg,#2980ef 0%,#00c6b8 100%);">
-              <div class="banner-placeholder-content">
-                <img src="{% static 'img/asociados3.png' %}" alt="Banner 3" class="banner-slide__img" />
-              </div>
-            </div>
-          </div>
-
         </div>
-
-        <button class="banner-slider__btn banner-slider__btn--prev" id="banner-prev" aria-label="Anterior">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="banner-slider__btn banner-slider__btn--next" id="banner-next" aria-label="Siguiente">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-
-        <div class="banner-slider__indicators" id="banner-dots">
-          <button class="banner-indicator active" data-slide="0"></button>
-          <button class="banner-indicator" data-slide="1"></button>
-          <button class="banner-indicator" data-slide="2"></button>
+        {% empty %}
+        <div class="banner-slide active">
+          <div class="banner-slide__placeholder" style="background:linear-gradient(135deg,#0a1628 0%,#1e4d8c 100%);">
+          </div>
         </div>
+        {% endfor %}
+
+      </div>
+
+      <button class="banner-slider__btn banner-slider__btn--prev" id="banner-prev" aria-label="Anterior">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="banner-slider__btn banner-slider__btn--next" id="banner-next" aria-label="Siguiente">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <div class="banner-slider__indicators" id="banner-dots">
+        {% for banner in banners %}
+        <button class="banner-indicator {% if forloop.first %}active{% endif %}"
+                data-slide="{{ forloop.counter0 }}"></button>
+        {% endfor %}
       </div>
     </div>
-  </section>
+  </div>
+</section>
   
 
   <!-- SERVICIOS — TABS -->
