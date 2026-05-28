@@ -440,7 +440,7 @@ async function verificarPaso1EnServidor() {
     formData.append('correo_registrado',document.getElementById('correo-reg').value.trim());
     formData.append('año',              document.getElementById('año').value.trim());
 
-    const response = await fetch('FondoEmpleados/PortalAsociados/verificar-paso1/', {   
+    const response = await fetch('/FondoEmpleados/PortalAsociados/verificar-paso1/', {   
       method: 'POST',
       headers: { 'X-CSRFToken': getCookie('csrftoken') },
       body: formData,
