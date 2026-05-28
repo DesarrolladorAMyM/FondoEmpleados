@@ -24,7 +24,7 @@ urlpatterns = [
    # path('', RedirectView.as_view(url='/FondoEmpleados/', permanent=False)), 
     path('FondoEmpleados/admin/', admin.site.urls),
     path('FondoEmpleados/', include('fondo.urls')),
-    path('FondoEmpleados/PortalAsociados/', include('PortalAsociados.urls')),
+    path('PortalAsociados/', include('PortalAsociados.urls')),
     path("FondoEmpleados/anuncios/", include("anuncios.urls")),] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
 
