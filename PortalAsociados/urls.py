@@ -8,5 +8,5 @@ from django.conf.urls.static import static
 
 urlpatterns=[
     path('PortalAsociados/', views.Asociados, name="PortalAsociados"),
-    path('FondoEmpleados/verificar-paso1/', views.verificar_paso1, name='verificar_paso1'),
+    path('PortalAsociados/verificar-paso1/', views.verificar_paso1, name='verificar_paso1'),
 ]
