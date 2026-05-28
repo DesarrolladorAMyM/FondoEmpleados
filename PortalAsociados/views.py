@@ -12,6 +12,8 @@ from django.utils import timezone
 
 
 #validdacion que se hace para hacer una llamada al ajax cuando va en el paso 1 y 2 del formulario 
+
+@csrf_exempt
 @require_POST
 def verificar_paso1(request):
     tipo_documento = request.POST.get('tipo_documento', '').strip()
