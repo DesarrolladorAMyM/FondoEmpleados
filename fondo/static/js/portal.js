@@ -442,6 +442,7 @@ async function verificarPaso1EnServidor() {
 
     const response = await fetch('/FondoEmpleados/PortalAsociados/verificar-paso1/', {   
       method: 'POST',
+      credentials: 'same-origin',   // ← ESTO FALTABA, envía las cookies CSRF
       headers: { 'X-CSRFToken': getCookie('csrftoken') },
       body: formData,
     });
