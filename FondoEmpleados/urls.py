@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/FondoEmpleados/', permanent=False)), 
+   # path('', RedirectView.as_view(url='/FondoEmpleados/', permanent=False)), 
     path('FondoEmpleados/admin/', admin.site.urls),
     path('FondoEmpleados/', include('fondo.urls')),
     path('FondoEmpleados/PortalAsociados/', include('PortalAsociados.urls')),

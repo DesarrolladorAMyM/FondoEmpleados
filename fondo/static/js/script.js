@@ -166,8 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
       modalTitle.textContent     = card.dataset.nombre    || "";
       modalBeneficio.textContent = card.dataset.beneficio || "";
       modalInfo.textContent      = card.dataset.info      || "";
-      modalAsesor.textContent    = card.dataset.asesor    || "Auxiliar FAMYM";
-      modalCelular.textContent   = card.dataset.celular   || "+57 310 883-6491";
+      modalAsesor.textContent    = card.dataset.asesor    || "";
+      modalCelular.textContent   = card.dataset.celular   || "";
+      const numero = (card.dataset.celular || "").replace(/[\s\-()+]/g, "");
+      const nombre = card.dataset.nombre || "";
+     modalLink.href = `https://api.whatsapp.com/send?phone=57${numero}&text=Hola%2C%20me%20interesa%20información%20sobre%20el%20convenio%20con%20*${encodeURIComponent(nombre)}*`;
       modalTipo.textContent      = card.dataset.tipo      || card.dataset.categoria || "";
       modalVigencia.textContent  = card.dataset.vigencia  || "Consultar con FAMYM";
       modal.classList.add("active");
@@ -179,17 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
   closeBtn.onclick = closeModal;
   overlay.onclick  = closeModal;
 
-  modalLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    closeModal();
-    setTimeout(() => {
-      const contacto = document.querySelector("#contacto");
-      if (contacto) {
-        const top = contacto.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top, behavior: "smooth" });
-      }
-    }, 250);
-  });
+ modalLink.onclick = () => closeModal();
+
+
 
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") closeModal();

@@ -1,99 +1,167 @@
 {% if anuncios_popup %}
 
 <style>
-  @keyframes entrar {
-    0%   { transform: translateY(60px) scale(0.8); opacity: 0; }
-    60%  { transform: translateY(-10px) scale(1.05); opacity: 1; }
-    100% { transform: translateY(0) scale(1); opacity: 1; }
+  @keyframes ap-entrar {
+    0%   { transform: translateY(40px); opacity: 0; }
+    60%  { transform: translateY(-6px); opacity: 1; }
+    100% { transform: translateY(0);    opacity: 1; }
   }
-  @keyframes flotar {
-    0%   { transform: translateY(0px); }
-    50%  { transform: translateY(-8px); }
-    100% { transform: translateY(0px); }
+  @keyframes apFadeIn { from { opacity:0 } to { opacity:1 } }
+
+  #ap-contenedor {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9990;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
   }
-  @keyframes borde-pulso {
-    0%   { box-shadow: 0 0 0 0 rgba(26,115,232,0.6); }
-    70%  { box-shadow: 0 0 0 10px rgba(26,115,232,0); }
-    100% { box-shadow: 0 0 0 0 rgba(26,115,232,0); }
+
+  @keyframes ap-flotar {
+    0%   { transform: translateY(0px);   box-shadow: 0 8px 32px rgba(0,0,0,0.28); }
+    50%  { transform: translateY(-10px); box-shadow: 0 18px 40px rgba(0,0,0,0.18); }
+    100% { transform: translateY(0px);   box-shadow: 0 8px 32px rgba(0,0,0,0.28); }
   }
-  .anuncio-popup-item.visible {
-    animation: entrar 0.6s ease forwards,
-               flotar 3s ease-in-out 1s infinite,
-               borde-pulso 2s ease 1s 3;
+
+  .ap-card {
+    display: none; /* oculto hasta que mostrarAnunciosPequenos() lo active */
+    position: relative;
+    width: 300px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+    background: #fff;
+    animation: ap-entrar .5s cubic-bezier(0.34,1.56,0.64,1) forwards;
   }
+
+  .ap-card.visible {
+    display: block;
+    animation: ap-entrar .5s cubic-bezier(0.34,1.56,0.64,1) forwards,
+               ap-flotar 3s ease-in-out 0.6s infinite;
+  }
+
+  .ap-cerrar {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    border: 1.5px solid #e2e8f0;
+    color: #0a1628;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform .2s ease, background .2s ease;
+    line-height: 1;
+    z-index: 10;
+  }
+  .ap-cerrar:hover {
+    transform: scale(1.15) rotate(90deg);
+    background: #f1f5f9;
+  }
+
+  .ap-img {
+    display: block;
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .ap-body {
+    padding: 10px 14px 12px;
+  }
+  .ap-titulo {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0a1628;
+    margin: 0 0 4px;
+    font-family: 'Sora', sans-serif;
+  }
+  .ap-subtitulo {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0 0 8px;
+    font-family: 'Sora', sans-serif;
+  }
+  .ap-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #0a1628, #1a3a6e);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-family: 'Sora', sans-serif;
+    transition: opacity .2s;
+  }
+  .ap-btn:hover { opacity: .85; }
 </style>
 
-{% for anuncio in anuncios_popup %}
-<div id="anuncio-popup-{{ forloop.counter }}"
-     class="anuncio-popup-item"
-     style="
-       position: fixed;
-       /* Cada popup sube 20px más que el anterior */
-       bottom: calc(24px + {{ forloop.counter0 }} * 210px);
-       right: 24px;
-       width: 220px;
-       z-index: {{ 9999|add:forloop.counter }};
-       border-radius: 12px;
-       border: 2px solid #1a73e8;
-       overflow: hidden;
-       box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-       display: none;">
+<div id="ap-contenedor">
+  {% for a in anuncios_popup %}
+  <div class="ap-card" id="ap-card-{{ forloop.counter }}">
+    <button class="ap-cerrar" onclick="cerrarPequeno('ap-card-{{ forloop.counter }}')" aria-label="Cerrar">&#x2715;</button>
 
-  {% if anuncio.enlace %}
-    <a href="{{ anuncio.enlace }}" target="_blank" rel="noopener">
-  {% endif %}
-    <img src="{{ anuncio.imagen.url }}"
-         alt="{{ anuncio.titulo }}"
-         style="width:100%; display:block; object-fit:cover; max-height:130px;">
-  {% if anuncio.enlace %}</a>{% endif %}
-
-  <button onclick="cerrarPopup('anuncio-popup-{{ forloop.counter }}')"
-          style="position:absolute; top:6px; right:8px;
-                 background:rgba(0,0,0,.4); border:none; color:#fff;
-                 border-radius:50%; width:22px; height:22px;
-                 cursor:pointer; font-size:14px; line-height:1;">×</button>
-
-  <div style="padding: 10px 14px 14px; background:#fff;">
-    {% if anuncio.titulo %}
-      <p style="margin:0 0 4px; font-weight:600; font-size:14px;">
-        {{ anuncio.titulo }}
-      </p>
-    {% endif %}
-    {% if anuncio.subtitulo %}
-      <p style="margin:0 0 10px; font-size:12px; color:#666;">
-        {{ anuncio.subtitulo }}
-      </p>
-    {% endif %}
-    {% if anuncio.enlace %}
-      <a href="{{ anuncio.enlace }}" target="_blank"
-         style="display:block; text-align:center; padding:7px;
-                background:#1a73e8; color:#fff; border-radius:8px;
-                text-decoration:none; font-size:13px; font-weight:500;">
-        {{ anuncio.texto_boton }}
+    {% if a.enlace %}
+      <a href="{{ a.enlace }}" target="_blank" rel="noopener noreferrer">
+        <img src="{{ a.imagen.url }}" alt="{{ a.titulo }}" class="ap-img">
       </a>
+    {% else %}
+      <img src="{{ a.imagen.url }}" alt="{{ a.titulo }}" class="ap-img">
+    {% endif %}
+
+    {% if a.titulo or a.subtitulo or a.enlace %}
+    <div class="ap-body">
+      {% if a.titulo %}<p class="ap-titulo">{{ a.titulo }}</p>{% endif %}
+      {% if a.subtitulo %}<p class="ap-subtitulo">{{ a.subtitulo }}</p>{% endif %}
+      {% if a.enlace %}
+        <a href="{{ a.enlace }}" target="_blank" rel="noopener noreferrer" class="ap-btn">
+          {{ a.texto_boton|default:"Ver más" }}
+        </a>
+      {% endif %}
+    </div>
     {% endif %}
   </div>
+  {% endfor %}
 </div>
-{% endfor %}
 
 <script>
-  // Mostrar cada popup con un pequeño delay escalonado
-  {% for anuncio in anuncios_popup %}
-  setTimeout(function() {
-    var popup = document.getElementById('anuncio-popup-{{ forloop.counter }}');
-    popup.style.display = 'block';
-    popup.classList.add('visible');
-  }, {{ forloop.counter0 }} * 400 + 2000);
-  {% endfor %}
-
-  function cerrarPopup(id) {
-    var popup = document.getElementById(id);
-    popup.style.animation = 'none';
-    popup.style.transition = 'all 0.3s ease';
-    popup.style.transform = 'translateY(60px)';
-    popup.style.opacity = '0';
-    setTimeout(function() { popup.remove(); }, 300);
+  function cerrarPequeno(id) {
+    var card = document.getElementById(id);
+    if (!card) return;
+    card.style.transition = 'opacity .3s ease, transform .3s ease';
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    setTimeout(function() { card.remove(); }, 300);
   }
+
+  /* Esta función es llamada por popup_grande.html cuando el usuario cierra el grande */
+  window.mostrarAnunciosPequenos = function() {
+    var cards = document.querySelectorAll('.ap-card');
+    cards.forEach(function(card, i) {
+      setTimeout(function() {
+        card.classList.add('visible');
+      }, i * 200); /* aparecen escalonados */
+    });
+  };
+
+  /* Si NO hay anuncio grande en esta página, mostrar los pequeños directamente */
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!document.getElementById('pg-overlay')) {
+      setTimeout(function() {
+        window.mostrarAnunciosPequenos();
+      }, 1000);
+    }
+  });
 </script>
 
 {% endif %}

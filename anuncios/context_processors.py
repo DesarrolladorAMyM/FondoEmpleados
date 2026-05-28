@@ -1,15 +1,24 @@
 from django.utils import timezone
-from .models import Anuncio
+from .models import AnuncioPequeno, AnuncioGrande
 
-def anuncio_popup(request):
+
+def _vigentes(queryset):
     hoy = timezone.now().date()
-    anuncios = []
-
-    for a in Anuncio.objects.filter(activo=True).order_by("orden"):
+    resultado = []
+    for a in queryset:
         if a.fecha_inicio and a.fecha_inicio > hoy:
             continue
         if a.fecha_fin and a.fecha_fin < hoy:
             continue
-        anuncios.append(a)
+        resultado.append(a)
+    return resultado
 
-    return {"anuncios_popup": anuncios}
+
+def anuncio_popup(request):
+    pequenos = _vigentes(AnuncioPequeno.objects.filter(activo=True).order_by("orden"))
+    grandes  = _vigentes(AnuncioGrande.objects.filter(activo=True).order_by("orden"))
+
+    return {
+        "anuncios_popup":        pequenos,
+        "anuncios_popup_grandes": grandes,
+    }
