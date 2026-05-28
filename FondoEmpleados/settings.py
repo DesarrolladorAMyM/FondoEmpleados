@@ -133,8 +133,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = '/FondoEmpleados/static/'
-STATIC_ROOT = r'E:\inetpub\wwwroot\PRUEBAS\FondoEmpleados\static'
+STATIC_URL = '/FondoEmpleados/fondo/static/'
+STATIC_ROOT = r'E:\inetpub\wwwroot\PRUEBAS\FondoEmpleados\fondo\static'
 
 #CONFIGURACION DEL CORREO DE OUTLLOOK
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
