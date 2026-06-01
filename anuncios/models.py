@@ -56,3 +56,19 @@ class AnuncioGrande(models.Model):
         if self.fecha_fin and self.fecha_fin < hoy:
             return False
         return True
+    
+class AnuncioFlotante(models.Model):
+        imagen       = models.ImageField(upload_to='anuncios/flotantes/')
+        enlace       = models.URLField(blank=True)
+        activo       = models.BooleanField(default=True)
+        orden        = models.PositiveIntegerField(default=0)
+        fecha_inicio = models.DateField(null=True, blank=True)
+        fecha_fin    = models.DateField(null=True, blank=True)
+
+        class Meta:
+            ordering = ['orden']
+            verbose_name = 'Anuncio Flotante'
+            verbose_name_plural = 'Anuncios Flotantes'
+
+        def __str__(self):
+            return f'Anuncio flotante #{self.pk}'

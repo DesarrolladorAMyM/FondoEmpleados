@@ -1,0 +1,119 @@
+{% if anuncios_flotantes %}
+
+<style>
+  @keyframes af-entrar {
+    0%   { transform: scale(0.85) translateY(30px); opacity: 0; }
+    60%  { transform: scale(1.03) translateY(-6px);  opacity: 1; }
+    100% { transform: scale(1)    translateY(0);     opacity: 1; }
+  }
+  @keyframes afFadeIn { from { opacity:0 } to { opacity:1 } }
+
+  #af-overlay {
+    display: none;
+  }
+  #af-overlay.visible {
+    display: flex;
+    animation: afFadeIn .3s ease forwards;
+  }
+  @keyframes af-flotar {
+    0%   { transform: translateY(0px);   box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
+    50%  { transform: translateY(-10px); box-shadow: 0 36px 72px rgba(0,0,0,0.35); }
+    100% { transform: translateY(0px);   box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
+  }
+
+  #af-box {
+    animation: af-entrar .55s cubic-bezier(0.34,1.56,0.64,1) forwards,
+               af-flotar 3s ease-in-out 0.7s infinite;
+  }
+  #af-cerrar {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #e2e8f0;
+    color: #0a1628;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    transition: transform .2s ease, background .2s ease;
+    line-height: 1;
+    font-family: 'Sora', sans-serif;
+    z-index: 10001;
+  }
+  #af-cerrar:hover {
+    transform: scale(1.15) rotate(90deg);
+    background: #f1f5f9;
+  }
+</style>
+
+<div id="af-overlay"
+     style="position:fixed; inset:0; z-index:9998;
+            background:rgba(10,22,40,0.78); backdrop-filter:blur(5px);
+            align-items:center; justify-content:center; padding:16px;
+            display:none;">
+
+  <div id="af-box" style="position:relative; max-width:min(700px, 92vw);">
+
+    <button id="af-cerrar" aria-label="Cerrar">&#x2715;</button>
+
+    {% with a=anuncios_flotantes.0 %}
+      {% if a.enlace %}
+        <a href="{{ a.enlace }}" target="_blank" rel="noopener noreferrer">
+          <img src="{{ a.imagen.url }}" alt="Anuncio"
+               style="display:block; width:100%; max-height:75vh;
+                      border-radius:16px; object-fit:contain;
+                      box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+        </a>
+      {% else %}
+        <img src="{{ a.imagen.url }}" alt="Anuncio"
+             style="display:block; width:100%; max-height:75vh;
+                    border-radius:16px; object-fit:contain;
+                    box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+      {% endif %}
+    {% endwith %}
+
+  </div>
+</div>
+
+<script>
+  (function() {
+    setTimeout(function() {
+      var overlay = document.getElementById('af-overlay');
+      if (overlay) {
+        overlay.style.display = 'flex';
+        void overlay.offsetWidth;
+        overlay.classList.add('visible');
+      }
+    }, 2000);
+
+    function cerrarFlotante() {
+      var overlay = document.getElementById('af-overlay');
+      if (!overlay) return;
+      overlay.style.transition = 'opacity .3s ease';
+      overlay.style.opacity = '0';
+      setTimeout(function() {
+        overlay.remove();
+        if (typeof window.mostrarAnunciosPequenos === 'function') {
+          window.mostrarAnunciosPequenos();
+        }
+      }, 300);
+    }
+
+    document.getElementById('af-cerrar').addEventListener('click', cerrarFlotante);
+    document.getElementById('af-overlay').addEventListener('click', function(e) {
+      if (e.target === this) cerrarFlotante();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') cerrarFlotante();
+    });
+  })();
+</script>
+
+{% endif %}

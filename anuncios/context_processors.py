@@ -1,5 +1,5 @@
 from django.utils import timezone
-from .models import AnuncioPequeno, AnuncioGrande
+from .models import AnuncioPequeno, AnuncioGrande, AnuncioFlotante
 
 
 def _vigentes(queryset):
@@ -15,10 +15,12 @@ def _vigentes(queryset):
 
 
 def anuncio_popup(request):
-    pequenos = _vigentes(AnuncioPequeno.objects.filter(activo=True).order_by("orden"))
-    grandes  = _vigentes(AnuncioGrande.objects.filter(activo=True).order_by("orden"))
+    pequenos  = _vigentes(AnuncioPequeno.objects.filter(activo=True).order_by("orden"))
+    grandes   = _vigentes(AnuncioGrande.objects.filter(activo=True).order_by("orden"))
+    flotantes = _vigentes(AnuncioFlotante.objects.filter(activo=True).order_by("orden"))  # ← nuevo
 
     return {
-        "anuncios_popup":        pequenos,
+        "anuncios_popup":         pequenos,
         "anuncios_popup_grandes": grandes,
+        "anuncios_flotantes":     flotantes,
     }
