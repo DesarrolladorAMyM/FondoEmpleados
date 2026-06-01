@@ -12,7 +12,7 @@ class AnuncioPequenoAdmin(admin.ModelAdmin):
 
 @admin.register(AnuncioGrande)
 class AnuncioGrandeAdmin(admin.ModelAdmin):
-    list_display  = ("__str__", "activo", "orden", "fecha_inicio", "fecha_fin")
+    list_display  = ("__str__", "activo", "orden", "fecha_inicio", "fecha_fin","fecha_limite")
     list_editable = ("activo", "orden")
     list_filter   = ("activo",)
     

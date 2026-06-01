@@ -36,6 +36,7 @@ class AnuncioGrande(models.Model):
                                      help_text="Tamaño recomendado: 800×600 px o más")
     enlace       = models.URLField(max_length=400, blank=True, verbose_name="Enlace (opcional)",
                                    help_text="Si lo llenas, la imagen será clickeable")
+    fecha_limite  = models.DateTimeField(null=True, blank=True)
     activo       = models.BooleanField(default=True, verbose_name="Activo")
     orden        = models.PositiveIntegerField(default=0, verbose_name="Orden")
     fecha_inicio = models.DateField(null=True, blank=True, verbose_name="Fecha de inicio")
